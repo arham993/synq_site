@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SYNQ IQ Suites</title>
+<meta name="description" content="SYNQ by Highlife: fully furnished AI smart homes, 1 and 2 BHK studio apartments in a G+18 tower in Greater Noida West.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Radius rule: interactive controls are full pills, panels 20px, inputs 12px. */
+:root{
+  color-scheme: dark;
+  --bg:#0B0D10;
+  --bg-2:#101317;
+  --panel:rgba(16,19,23,.74);
+  --panel-solid:#13171B;
+  --line:#252B30;
+  --line-2:#343C42;
+  --text:#ECEEE9;
+  --muted:#A0A8AA;
+  --dim:#6F787B;
+  --accent:#86E0AE;
+  --accent-ink:#082014;
+  --danger:#FF9C8A;
+  --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --sans:"Outfit", "Segoe UI", system-ui, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --gutter:clamp(16px, 4vw, 56px);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-weight:800;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.tab-num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* 3D stage */
+#stage{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+#stage-fallback{position:fixed;inset:0;z-index:0;background:var(--bg) url("img/tower.webp") 70% 40%/cover no-repeat;opacity:.55}
+.scrim{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg, rgba(11,13,16,.92) 0%, rgba(11,13,16,.72) 32%, rgba(11,13,16,0) 62%),
+             linear-gradient(0deg, rgba(11,13,16,.7) 0%, rgba(11,13,16,0) 30%)}
+.grain{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+main,.nav,footer{position:relative;z-index:3}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:10;padding-top:env(safe-area-inset-top,0px)}
+.nav-in{height:68px;display:flex;align-items:center;gap:32px;padding-inline:var(--gutter);
+  background:rgba(11,13,16,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(37,43,48,.6)}
+.brand{display:flex;align-items:baseline;gap:10px;text-decoration:none}
+.brand b{font:600 22px/1 var(--sans);letter-spacing:.22em}
+.brand span{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.nav-links{display:flex;gap:26px;margin-left:auto}
+.nav-links a{text-decoration:none;font-size:14px;color:var(--muted);transition:color .25s}
+.nav-links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border-radius:999px;border:1px solid transparent;
+  font-weight:500;font-size:15px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .35s var(--ease),background .25s,border-color .25s,color .25s}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:#A2EDC3}
+.btn-ghost{border-color:var(--line-2);color:var(--text);background:rgba(11,13,16,.4)}
+.btn-ghost:hover{border-color:var(--text)}
+.btn .arr{transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(4px)}
+.nav .btn{height:40px;padding:0 18px;font-size:14px}
+
+/* Sections */
+section{padding-inline:var(--gutter);position:relative}
+.wrap{max-width:1320px;margin:0 auto}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.h2{font-family:var(--display);font-size:clamp(44px,6.2vw,88px);line-height:.95;letter-spacing:-.005em;text-transform:uppercase}
+.lede{font-size:clamp(16px,1.35vw,19px);color:var(--muted);max-width:52ch;font-weight:300}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(14px) saturate(130%);-webkit-backdrop-filter:blur(14px) saturate(130%)}
+@media (prefers-reduced-transparency: reduce){.panel{background:var(--panel-solid);backdrop-filter:none}}
+
+/* Hero */
+.hero{min-height:100dvh;display:flex;flex-direction:column;justify-content:flex-end;padding-block:120px 72px}
+.hero .wrap{width:100%}
+.hero-copy{max-width:640px;display:grid;gap:26px}
+.hero h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(58px,8.6vw,128px);line-height:.88;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero .lede{max-width:42ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.hero-price{position:absolute;right:var(--gutter);bottom:72px;text-align:right;display:grid;gap:4px}
+.hero-price .big{font:800 clamp(40px,4.4vw,64px)/1 var(--display)}
+.hero-price small{color:var(--muted);font-size:13px}
+
+/* Build (pinned) */
+.build{height:260vh;padding:0}
+.build-pin{height:100vh;height:100dvh;display:flex;align-items:center;padding-inline:var(--gutter)}
+.build-grid{width:100%;max-width:1320px;margin:0 auto;display:grid;gap:28px;max-width:1320px}
+.level{font:900 clamp(120px,19vw,280px)/.8 var(--display);letter-spacing:-.02em;display:flex;align-items:flex-end;gap:18px}
+.level small{font:500 14px/1.3 var(--mono);color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding-bottom:18px}
+.build h2{font-family:var(--display);font-size:clamp(36px,4.4vw,60px);line-height:1;text-transform:uppercase;max-width:14ch}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,200px));gap:20px}
+.fact{border-top:1px solid var(--line-2);padding-top:14px;opacity:.28;transition:opacity .6s var(--ease),border-color .6s}
+.fact.on{opacity:1;border-color:var(--accent)}
+.fact b{display:block;font-weight:500;font-size:15px}
+.fact span{color:var(--muted);font-size:13.5px;line-height:1.45}
+.progress{height:2px;background:var(--line);max-width:420px;position:relative;overflow:hidden}
+.progress i{position:absolute;inset:0;background:var(--accent);transform-origin:left;transform:scaleX(.25)}
+
+/* Smart living */
+.smart{padding-block:18vh}
+.smart-grid{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:40px;align-items:start}
+.smart-copy{display:grid;gap:22px}
+.modes{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.mode{height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--line-2);background:rgba(11,13,16,.55);cursor:pointer;font-size:15px;transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
+.mode:hover{border-color:var(--text)}
+.mode:active{transform:scale(.97)}
+.mode[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.mode-card{padding:26px;display:grid;gap:10px;min-height:170px}
+.mode-card .room{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.mode-card h3{font:800 34px/1 var(--display);text-transform:uppercase}
+.mode-card p{color:var(--muted);max-width:44ch}
+.swatch{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:4px}
+.swatch span{display:flex;align-items:center;gap:8px}
+.swatch i{width:22px;height:8px;border-radius:999px;background:var(--c,#fff);box-shadow:0 0 16px var(--c,#fff)}
+.control{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.control div{background:var(--panel-solid);padding:16px}
+.control b{display:block;font-weight:500}
+.control span{font-size:13px;color:var(--muted);line-height:1.4;display:block}
+.smart-photo{justify-self:end;width:min(100%,380px);margin-top:28vh;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.smart-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+
+/* System */
+.system{padding-block:14vh}
+.system-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr 1fr;gap:14px}
+.sys-photo{grid-row:span 2;border-radius:20px;overflow:hidden;position:relative;min-height:320px;border:1px solid var(--line)}
+.sys-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sys-head{grid-column:span 3;padding:8px 4px 18px;display:grid;gap:14px;align-content:end}
+.cluster{padding:22px;display:grid;gap:18px;align-content:start}
+.cluster h3{font:800 24px/1 var(--display);text-transform:uppercase;color:var(--accent)}
+.cluster dl{margin:0;display:grid;gap:16px}
+.cluster dt{font-weight:500}
+.cluster dd{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+
+/* Units */
+.units{padding-block:16vh}
+.units-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;margin-top:40px}
+.plan-box{padding:22px;display:grid;gap:16px}
+.plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.seg{display:inline-flex;padding:4px;border-radius:999px;border:1px solid var(--line-2);background:rgba(11,13,16,.6)}
+.seg button{height:38px;padding:0 18px;border-radius:999px;border:0;background:transparent;cursor:pointer;font-size:14px;transition:background .3s,color .3s}
+.seg button[aria-selected="true"]{background:var(--text);color:var(--bg)}
+.plan-note{font:400 12px var(--mono);color:var(--dim)}
+.plan-svg{width:100%;height:auto;display:block;max-height:520px}
+.plan-svg .room{fill:rgba(134,224,174,.035);stroke:#C9D0CE;stroke-width:1.4;vector-effect:non-scaling-stroke;transition:fill .3s}
+.plan-svg .room.wet{fill:rgba(160,168,170,.06)}
+.plan-svg .room.bal{fill:transparent;stroke-dasharray:5 4}
+.plan-svg g.r:hover .room,.plan-svg g.r.hl .room{fill:rgba(134,224,174,.18)}
+.plan-svg text{fill:var(--text);font-family:var(--sans);font-weight:500}
+.plan-svg text.d{fill:var(--muted);font-family:var(--mono);font-weight:400}
+.areas{padding:26px;display:grid;gap:22px;align-content:start}
+.area{display:grid;gap:4px}
+.area .k{font-size:13px;color:var(--muted)}
+.area .v{font:800 clamp(46px,5vw,68px)/.95 var(--display)}
+.area .v small{font:400 14px var(--mono);color:var(--muted);margin-left:8px}
+.area .m{font:400 12.5px var(--mono);color:var(--dim)}
+.area.main .v{color:var(--accent)}
+.rooms{display:grid;gap:8px;padding-top:18px;border-top:1px solid var(--line)}
+.rooms div{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.rooms div span:last-child{font-family:var(--mono);font-size:12.5px;color:var(--muted);text-align:right}
+
+/* Location */
+.location{padding-block:16vh}
+.loc-band{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);min-height:300px;display:flex;align-items:flex-end;padding:clamp(22px,4vw,48px)}
+.loc-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.loc-band::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,13,16,.92),rgba(11,13,16,.2) 70%)}
+.loc-band > div{position:relative;z-index:1;display:grid;gap:16px}
+.routes{display:flex;flex-wrap:wrap;gap:8px}
+.routes span{padding:8px 14px;border-radius:999px;border:1px solid var(--line-2);background:rgba(11,13,16,.6);font-size:13.5px}
+.loc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.loc{padding:22px;display:grid;gap:12px;align-content:start}
+.loc h3{font:600 15px var(--sans);color:var(--muted)}
+.loc ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.loc li{display:flex;align-items:baseline;gap:10px;font-size:15px}
+.loc li span:first-child{flex:1;min-width:0}
+.loc li .t{font:500 20px/1 var(--display);white-space:nowrap}
+.loc li .t small{font:400 11px var(--mono);color:var(--muted);margin-left:3px}
+
+/* Green + amenities */
+.green{padding-block:12vh 6vh}
+.green-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:center}
+.green-img{border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.green-img img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.green-copy{display:grid;gap:18px}
+.green-copy .num{font:900 clamp(90px,11vw,160px)/.8 var(--display);color:var(--accent)}
+.green-copy .num small{font:500 clamp(22px,2.4vw,32px) var(--display);color:var(--text);margin-left:6px;text-transform:uppercase}
+.marquee{overflow:hidden;border-block:1px solid var(--line);margin-top:12vh;padding-block:22px;background:rgba(11,13,16,.55);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;gap:44px;animation:slide 60s linear infinite}
+.track span{font:800 clamp(28px,3.4vw,44px)/1 var(--display);text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.track span::after{content:"";width:10px;height:10px;border:1.5px solid var(--accent);transform:rotate(45deg)}
+.marquee:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* Price */
+.price{padding-block:16vh}
+.price-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:36px}
+.p-main{grid-column:span 4;padding:clamp(24px,3vw,40px);display:grid;gap:18px;align-content:space-between;min-height:340px;
+  background:radial-gradient(120% 90% at 100% 0%, rgba(134,224,174,.16), transparent 60%), var(--panel)}
+.p-old{font:500 24px var(--display);color:var(--muted);text-decoration:line-through;text-decoration-color:var(--danger);text-decoration-thickness:2px}
+.p-new{font:900 clamp(84px,11vw,168px)/.82 var(--display);letter-spacing:-.01em}
+.p-new small{font:500 16px var(--mono);color:var(--muted);letter-spacing:0;margin-left:10px;vertical-align:.4em}
+.p-plan{grid-column:span 2;padding:28px;display:grid;gap:14px;align-content:start}
+.p-plan .ratio{font:900 clamp(56px,6vw,84px)/.9 var(--display);letter-spacing:.01em}
+.p-plan .ratio i{font-style:normal;color:var(--accent)}
+.p-plan p{color:var(--muted);font-size:14.5px}
+.p-yield{grid-column:span 6;padding:24px 28px;display:flex;flex-wrap:wrap;gap:18px 40px;align-items:center;justify-content:space-between;border-color:rgba(134,224,174,.35)}
+.p-yield b{font:800 clamp(28px,3.2vw,44px)/1 var(--display);text-transform:uppercase}
+.p-yield b em{font-style:normal;color:var(--accent)}
+.p-yield span{color:var(--muted);font-size:14px;max-width:44ch}
+.free{grid-column:span 6;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.free div{padding:22px;display:grid;gap:6px;align-content:end;min-height:150px}
+.free div:first-child{background:linear-gradient(160deg,rgba(134,224,174,.12),transparent 70%),var(--panel)}
+.free b{font:800 28px/1 var(--display);text-transform:uppercase}
+.free span{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.free small{color:var(--muted);font-size:13px}
+
+/* Enquiry */
+.enquire{padding-block:16vh 10vh}
+.enq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,640px);gap:40px;align-items:start}
+.enq-copy{display:grid;gap:22px;position:sticky;top:120px}
+form.panel{padding:clamp(22px,3vw,36px);display:grid;gap:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:grid;gap:8px}
+.field label,.field legend{font-size:14px;font-weight:500;padding:0}
+.field label i,.field legend i{font-style:normal;color:var(--accent)}
+.field input,.field textarea,.field select{width:100%;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid var(--line-2);background:#0E1114;color:var(--text);transition:border-color .2s,box-shadow .2s}
+.field textarea{min-height:110px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#7D8689}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(134,224,174,.2)}
+.field input[aria-invalid="true"]{border-color:var(--danger)}
+.help{font-size:12.5px;color:var(--muted)}
+.err{font-size:13px;color:var(--danger);min-height:0}
+fieldset{border:0;margin:0;padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-flex;align-items:center;height:42px;padding:0 18px;border-radius:999px;border:1px solid var(--line-2);cursor:pointer;font-size:14px;transition:all .25s}
+.chips input:checked + span{background:var(--text);color:var(--bg);border-color:var(--text)}
+.chips input:focus-visible + span{outline:2px solid var(--accent);outline-offset:3px}
+.form-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.form-foot .help{max-width:36ch}
+.status{padding:14px 16px;border-radius:12px;font-size:14.5px;border:1px solid var(--line-2)}
+.status.ok{border-color:rgba(134,224,174,.5);background:rgba(134,224,174,.08)}
+.status.bad{border-color:rgba(255,156,138,.5);background:rgba(255,156,138,.07)}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.inbox{margin-top:18px;padding:22px;display:grid;gap:12px}
+.inbox h3{font:600 15px var(--sans)}
+.inbox ol{list-style:none;margin:0;padding:0;display:grid;gap:10px;max-height:340px;overflow:auto}
+.inbox li{padding:12px 14px;border:1px solid var(--line);border-radius:12px;display:grid;gap:3px;font-size:14px}
+.inbox li .meta{font:400 12px var(--mono);color:var(--muted)}
+
+/* Footer */
+footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:rgba(11,13,16,.88)}
+.foot{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:24px 48px;align-items:center}
+.foot img{width:180px;height:auto;opacity:.9}
+.foot p{color:var(--muted);font-size:13.5px;max-width:70ch}
+.foot .legal{grid-column:1/-1;color:var(--dim);font-size:12px}
+
+/* Responsive */
+@media (max-width: 1080px){
+  .system-grid{grid-template-columns:1fr 1fr}
+  .sys-head{grid-column:1/-1}
+  .sys-photo{grid-row:auto;grid-column:1/-1;min-height:240px}
+  .loc-grid{grid-template-columns:1fr 1fr}
+  .free{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width: 900px){
+  .scrim{background:linear-gradient(0deg, rgba(11,13,16,.9) 0%, rgba(11,13,16,.55) 45%, rgba(11,13,16,.25) 100%)}
+  .nav-links{display:none}
+  .nav .btn{margin-left:auto}
+  .hero{padding-block:100px 48px}
+  .hero-price{position:static;text-align:left;margin-top:28px}
+  .smart-grid,.units-grid,.green-grid,.enq-grid{grid-template-columns:minmax(0,1fr)}
+  .smart-photo{justify-self:start;margin-top:0;width:100%}
+  .smart-photo img{aspect-ratio:16/10}
+  .enq-copy{position:static}
+  .price-grid{grid-template-columns:minmax(0,1fr)}
+  .p-yield b{font-size:28px}
+  .p-main,.p-plan,.p-yield,.free{grid-column:auto}
+  .control{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 640px){
+  .facts{grid-template-columns:1fr;gap:12px}
+  .system-grid,.loc-grid{grid-template-columns:minmax(0,1fr)}
+  .p-new{font-size:clamp(64px,21vw,96px)}
+  .p-new small{display:block;margin:8px 0 0}
+  .free{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .free b{font-size:22px}
+  .free div{min-height:120px}
+  .row2{grid-template-columns:minmax(0,1fr)}
+  .level{font-size:clamp(110px,34vw,160px)}
+  .build{height:220vh}
+  .foot{grid-template-columns:minmax(0,1fr)}
+  .brand span{display:none}
+}
+@media (prefers-reduced-motion: reduce){
+  .track{animation:none}
+  *{scroll-behavior:auto!important}
+}
+</style>
+<meta property="og:title" content="SYNQ IQ Suites, Greater Noida West">
+<meta property="og:description" content="Fully furnished AI smart homes, 1 and 2 BHK, G+18 tower.">
+<meta property="og:image" content="img/tower.webp">
+</head>
+<body>
+
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="stage-fallback" hidden></div>
+<div class="scrim"></div>
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="SYNQ home"><b>SYNQ</b><span>IQ Suites by Highlife</span></a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#smart">Smart living</a>
+      <a href="#homes">Homes</a>
+      <a href="#location">Location</a>
+      <a href="#price">Price</a>
+    </nav>
+    <a class="btn btn-primary" href="#enquire">Enquire now</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow" data-in>IQ Suites by Highlife, Greater Noida West</p>
+        <h1 data-in>A home that <em>runs itself.</em></h1>
+        <p class="lede" data-in>Fully furnished 1 &amp; 2 BHK studio apartments in a G+18 tower, wired with SYNQ smart living from day one.</p>
+        <div class="cta-row" data-in>
+          <a class="btn btn-primary" href="#enquire">Enquire now <span class="arr">&rarr;</span></a>
+          <a class="btn btn-ghost" href="#homes">See unit plans</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-price" data-in>
+      <small>Own an AI home from</small>
+      <span class="big tab-num">&#8377;40 Lakh*</span>
+      <small>*NPV mandatory</small>
+    </div>
+  </section>
+
+  <!-- BUILD (pinned) -->
+  <section class="build" id="build" aria-label="Construction">
+    <div class="build-pin">
+      <div class="build-grid">
+        <div class="level" aria-live="off"><span id="lvl">G</span><small>of G+18<br>floors</small></div>
+        <h2>A premium high-rise, rising floor by floor.</h2>
+        <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+        <div class="facts">
+          <div class="fact" data-at=".35"><b>More usable area</b><span>Layouts planned so less of what you pay for is lost to walls.</span></div>
+          <div class="fact" data-at=".62"><b>Lower saleable ratio</b><span>Smart planning keeps the loading on your unit down.</span></div>
+          <div class="fact" data-at=".9"><b>Spacious layouts</b><span>Better design across every one of the 18 residential floors.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMART LIVING -->
+  <section class="smart" id="smart">
+    <div class="wrap smart-grid">
+      <div class="smart-copy">
+        <p class="eyebrow">SYNQ smart living</p>
+        <h2 class="h2" data-rv>One room,<br>four identities.</h2>
+        <p class="lede" data-rv>Tap once and light, curtains and climate change together. Pick a scene and watch the tower change with it.</p>
+        <div class="modes" role="tablist" aria-label="Room scenes">
+          <button class="mode" role="tab" id="m-routine" aria-selected="true" data-mode="routine">Routine</button>
+          <button class="mode" role="tab" id="m-relax" aria-selected="false" data-mode="relax">Relax</button>
+          <button class="mode" role="tab" id="m-master" aria-selected="false" data-mode="master">Master</button>
+          <button class="mode" role="tab" id="m-work" aria-selected="false" data-mode="work">Work</button>
+        </div>
+        <div class="panel mode-card" role="tabpanel" aria-live="polite">
+          <span class="room" id="mc-room">Guest room</span>
+          <h3 id="mc-title">Routine</h3>
+          <p id="mc-text">Natural white across every point, the flat at its most open.</p>
+          <div class="swatch"><span><i id="mc-sw" style="--c:#F3EEDF"></i><em id="mc-light" style="font-style:normal">Natural white</em></span><span id="mc-curtain">Curtains open</span></div>
+        </div>
+        <div class="control" data-rv>
+          <div><b>App</b><span>On your phone, from anywhere</span></div>
+          <div><b>Voice</b><span>Alexa, built in</span></div>
+          <div><b>Panel</b><span>8-inch digital screen</span></div>
+          <div><b>Auto</b><span>Scenes, no touch</span></div>
+        </div>
+      </div>
+      <figure class="smart-photo" data-rv style="margin-inline:0;margin-bottom:0">
+        <img src="img/curtain.webp" alt="Motorised curtains opening onto morning light" width="1100" height="619" loading="lazy">
+      </figure>
+    </div>
+  </section>
+
+  <!-- SYSTEM -->
+  <section class="system" aria-labelledby="sys-h">
+    <div class="wrap system-grid">
+      <div class="sys-photo" data-rv><img src="img/interior.webp" alt="Furnished dining corner with pendant lights and full-height glazing" width="1200" height="675" loading="lazy"></div>
+      <div class="sys-head">
+        <h2 class="h2" id="sys-h" data-rv>What goes into<br>every home.</h2>
+        <p class="lede" data-rv>Nine SYNQ components, installed and tuned before you move in.</p>
+      </div>
+      <div class="panel cluster" data-rv>
+        <h3>Control</h3>
+        <dl>
+          <div><dt>SYNQ Switches</dt><dd>Touch glass with a gold bezel. No exposed mechanical contacts, so they are shockproof.</dd></div>
+          <div><dt>SYNQ Interface</dt><dd>8-inch touch screen with Alexa built in. One screen for light and climate.</dd></div>
+          <div><dt>SYNQ Gateway</dt><dd>Zigbee wired gateway that ties every device together.</dd></div>
+        </dl>
+      </div>
+      <div class="panel cluster" data-rv>
+        <h3>Comfort</h3>
+        <dl>
+          <div><dt>SYNQ Lighting</dt><dd>17 smart tunable points. Cove, spots and lamps on one circuit.</dd></div>
+          <div><dt>SYNQ Climate</dt><dd>IR blaster, so the AC is on before you reach home.</dd></div>
+          <div><dt>SYNQ Motion</dt><dd>Motorised curtain track, run by a scene, by time or by voice.</dd></div>
+        </dl>
+      </div>
+      <div class="panel cluster" data-rv>
+        <h3>Safety</h3>
+        <dl>
+          <div><dt>SYNQ Sense</dt><dd>Contact sensor on the entry door, motion sensor in the washroom.</dd></div>
+          <div><dt>Wi-Fi cameras</dt><dd>Live video with motion and person detection.</dd></div>
+          <div><dt>SYNQ Retrofit</dt><dd>Retrofit relay, 40A variant, for heavy appliances.</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNITS -->
+  <section class="units" id="homes" aria-labelledby="units-h">
+    <div class="wrap">
+      <h2 class="h2" id="units-h" data-rv>Two layouts.<br>Both fully furnished.</h2>
+      <div class="units-grid">
+        <div class="panel plan-box">
+          <div class="plan-top">
+            <div class="seg" role="tablist" aria-label="Unit type">
+              <button role="tab" id="u1" aria-selected="true" data-unit="1">1 BHK</button>
+              <button role="tab" id="u2" aria-selected="false" data-unit="2">2 BHK</button>
+            </div>
+            <span class="plan-note">Drawn to scale, dimensions in mm</span>
+          </div>
+          <svg class="plan-svg" id="plan" role="img" aria-label="Unit floor plan"></svg>
+        </div>
+        <div class="panel areas" aria-live="polite">
+          <div class="area main"><span class="k">Total saleable area</span><span class="v tab-num" id="a-sale">964<small>sq.ft</small></span><span class="m" id="a-sale-m">89.60 sq.m</span></div>
+          <div class="area"><span class="k">Total built-up area</span><span class="v tab-num" id="a-built">593<small>sq.ft</small></span><span class="m" id="a-built-m">55.10 sq.m</span></div>
+          <div class="area"><span class="k">Total carpet area</span><span class="v tab-num" id="a-carpet">456<small>sq.ft</small></span><span class="m" id="a-carpet-m">42.32 sq.m</span></div>
+          <div class="rooms" id="rooms"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location" id="location" aria-labelledby="loc-h">
+    <div class="wrap">
+      <div class="loc-band" data-rv>
+        <img src="img/aerial.webp" alt="Aerial view of the Greater Noida West skyline at night" width="1600" height="900" loading="lazy">
+        <div>
+          <h2 class="h2" id="loc-h">In the heart of<br>Greater Noida West.</h2>
+          <div class="routes"><span>Via NH 24</span><span>Greater Noida and Noida West Link Road</span><span>Via F&amp;G</span></div>
+        </div>
+      </div>
+      <div class="loc-grid">
+        <div class="panel loc" data-rv><h3>Schools and colleges</h3><ul>
+          <li><span>Ryan International School</span><span class="t">4<small>min</small></span></li>
+          <li><span>The Shri Ram Universal School</span><span class="t">6<small>min</small></span></li>
+          <li><span>Pacific World School</span><span class="t">6<small>min</small></span></li>
+          <li><span>JBM Smart Start</span><span class="t">7<small>min</small></span></li>
+          <li><span>Lotus Valley International School</span><span class="t">8<small>min</small></span></li></ul></div>
+        <div class="panel loc" data-rv><h3>Health care</h3><ul>
+          <li><span>Yatharth Super Speciality Hospital</span><span class="t">6<small>min</small></span></li>
+          <li><span>Fortis Hospital</span><span class="t">19<small>min</small></span></li>
+          <li><span>Kailash Hospital</span><span class="t">25<small>min</small></span></li></ul></div>
+        <div class="panel loc" data-rv><h3>Business parks</h3><ul>
+          <li><span>R Systems</span><span class="t">6<small>min</small></span></li>
+          <li><span>Artha Infratech</span><span class="t">6<small>min</small></span></li>
+          <li><span>Golden I</span><span class="t">7<small>min</small></span></li>
+          <li><span>Yotta Data Center Park</span><span class="t">10<small>min</small></span></li></ul></div>
+        <div class="panel loc" data-rv><h3>Shopping and entertainment</h3><ul>
+          <li><span>Blue Sapphire Mall</span><span class="t">6<small>min</small></span></li>
+          <li><span>D-Mart</span><span class="t">7<small>min</small></span></li>
+          <li><span>Gaur City Center &amp; Mall</span><span class="t">9<small>min</small></span></li></ul></div>
+        <div class="panel loc" data-rv><h3>Hotels</h3><ul>
+          <li><span>Holiday Inn</span><span class="t">6<small>min</small></span></li>
+          <li><span>Radisson Blu</span><span class="t">8<small>min</small></span></li>
+          <li><span>Hibiscus Hotel</span><span class="t">8<small>min</small></span></li>
+          <li><span>Gaur Sarovar Portico</span><span class="t">12<small>min</small></span></li></ul></div>
+        <div class="panel loc" data-rv><h3>Airports</h3><ul>
+          <li><span>Noida International Airport</span><span class="t">55<small>min</small></span></li>
+          <li><span>Indira Gandhi International Airport</span><span class="t">60<small>min</small></span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GREEN + AMENITIES -->
+  <section class="green" aria-labelledby="green-h">
+    <div class="wrap green-grid">
+      <div class="green-img" data-rv><img src="img/tower.webp" alt="Artist's impression of the SYNQ tower above its landscaped grounds" width="1400" height="787" loading="lazy"></div>
+      <div class="green-copy">
+        <div class="num" data-rv>100<small>metre</small></div>
+        <h2 class="h2" id="green-h" style="font-size:clamp(36px,4.2vw,58px)" data-rv>Facing a green belt.</h2>
+        <p class="lede" data-rv>Every home looks over open green, with a clubhouse, pool and landscaped gardens on the ground below.</p>
+      </div>
+    </div>
+  </section>
+  <div class="marquee" aria-label="Amenities" style="position:relative;z-index:3">
+    <div class="track">
+      <span>Club with swimming pool</span><span>Green landscape area</span><span>Toddlers' play area</span><span>Lawn</span><span>Water feature</span><span>Topiary garden</span><span>Chip and putt</span><span>Sit-out plaza</span><span>Senior citizen garden</span><span>Stepped seating</span><span>Multiplay court</span><span>Swimming pool</span><span>Deck seating</span><span>Jogging track</span>
+      <span aria-hidden="true">Club with swimming pool</span><span aria-hidden="true">Green landscape area</span><span aria-hidden="true">Toddlers' play area</span><span aria-hidden="true">Lawn</span><span aria-hidden="true">Water feature</span><span aria-hidden="true">Topiary garden</span><span aria-hidden="true">Chip and putt</span><span aria-hidden="true">Sit-out plaza</span><span aria-hidden="true">Senior citizen garden</span><span aria-hidden="true">Stepped seating</span><span aria-hidden="true">Multiplay court</span><span aria-hidden="true">Swimming pool</span><span aria-hidden="true">Deck seating</span><span aria-hidden="true">Jogging track</span>
+    </div>
+  </div>
+
+  <!-- PRICE -->
+  <section class="price" id="price" aria-labelledby="price-h">
+    <div class="wrap">
+      <p class="eyebrow">Limited time offer</p>
+      <h2 class="h2" id="price-h" style="margin-top:18px" data-rv>Now, the price.</h2>
+      <div class="price-grid">
+        <div class="panel p-main" data-rv>
+          <span class="p-old tab-num">&#8377;11,600 per sq.ft</span>
+          <div class="p-new tab-num"><span id="price-count">&#8377;10,600</span><small>per sq.ft</small></div>
+          <span class="help">Basic price for a limited time.</span>
+        </div>
+        <div class="panel p-plan" data-rv>
+          <span class="help">Payment plan</span>
+          <span class="ratio tab-num">40<i>:</i>40<i>:</i>20</span>
+          <p>Construction-linked, as mentioned in the price list.</p>
+        </div>
+        <div class="panel p-yield" data-rv>
+          <b>Pay 40%, get <em class="tab-num">&#8377;40,000</em> a month</b>
+          <span>Paid to you every month till possession. *NPV mandatory.</span>
+        </div>
+        <div class="free">
+          <div class="panel" data-rv><span>Included</span><b>Fully furnished</b><small>Move in with nothing but bags.</small></div>
+          <div class="panel" data-rv><span>Free</span><b>Power backup</b></div>
+          <div class="panel" data-rv><span>Free</span><b>2-year maintenance</b></div>
+          <div class="panel" data-rv><span>Free</span><b>GST</b></div>
+          <div class="panel" data-rv><span>Free*</span><b>Car parking</b><small>2 BHK only</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENQUIRE -->
+  <section class="enquire" id="enquire" aria-labelledby="enq-h">
+    <div class="wrap enq-grid">
+      <div class="enq-copy">
+        <h2 class="h2" id="enq-h">Book your<br>site visit.</h2>
+        <p class="lede">Leave your details and send them on WhatsApp. The sales team will reply with the price list, floor availability and a visit slot.</p>
+      </div>
+      <div>
+        <form class="panel" id="enq" novalidate>
+          <div class="row2">
+            <div class="field">
+              <label for="f-name">Full name <i>*</i></label>
+              <input id="f-name" name="name" autocomplete="name" placeholder="e.g. Aarav Mehta" required>
+              <p class="err" id="e-name" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">Phone <i>*</i></label>
+              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98110 42736" required>
+              <p class="err" id="e-phone" role="alert"></p>
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="f-email">Email</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="you@example.com">
+              <p class="err" id="e-email" role="alert"></p>
+            </div>
+            <div class="field">
+              <label for="f-date">Preferred visit date</label>
+              <input id="f-date" name="visit" type="date">
+              <p class="help">Optional. We confirm the slot on call.</p>
+            </div>
+          </div>
+          <fieldset class="field">
+            <legend>Interested in</legend>
+            <div class="chips">
+              <label><input type="radio" name="unit" id="f-u1" value="1 BHK" checked><span>1 BHK</span></label>
+              <label><input type="radio" name="unit" id="f-u2" value="2 BHK"><span>2 BHK</span></label>
+              <label><input type="radio" name="unit" id="f-u3" value="Not sure yet"><span>Not sure yet</span></label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="f-msg">Message</label>
+            <textarea id="f-msg" name="message" placeholder="Anything we should know, e.g. preferred floor or a time to call"></textarea>
+          </div>
+          <div class="form-foot">
+            <p class="help">Sends your enquiry to the sales team on WhatsApp.</p>
+            <button class="btn btn-primary" type="submit" id="f-submit">Send on WhatsApp <span class="arr">&rarr;</span></button>
+          </div>
+          <div class="status" id="f-status" hidden role="status"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <img src="img/logo.webp" alt="Moneytree Realty" width="520" height="130">
+    <p>SYNQ, IQ Suites by Highlife, is presented by Moneytree Realty with Yatharth Family Office and Great Value Realty. A brand with 18 years of legacy.</p>
+    <p class="legal">*NPV mandatory. Prices, payment plan and offers are as mentioned in the official price list and may change without notice. Images are artist's impressions. The 3D tower on this page is an illustration, not the final elevation.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const hasGsap = !!window.gsap;
+if (hasGsap && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+
+/* ---------- Smooth scroll ---------- */
+let lenis = null;
+if (!reduce && window.Lenis && hasGsap) {
+  lenis = new Lenis({ lerp: 0.085, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const id = a.getAttribute('href'); const el = id.length > 1 && document.querySelector(id);
+  if (id === '#top') { e.preventDefault(); lenis ? lenis.scrollTo(0) : scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}); return; }
+  if (!el) return; e.preventDefault();
+  lenis ? lenis.scrollTo(el, { offset: -70 }) : el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+}));
+
+/* ---------- Scene state shared with UI ---------- */
+const S = { scroll: 0, build: reduce ? 1 : 0, intro: reduce ? 1 : 0, mode: 'routine', mx: 0, my: 0 };
+const MODES = {
+  routine: { color: 0xF3EEDF, hex: '#F3EEDF', intensity: 1.05, full: false, room: 'Guest room', title: 'Routine', light: 'Natural white', curtain: 'Curtains open', text: 'Natural white across every point, the flat at its most open.' },
+  relax:   { color: 0xFF9A4A, hex: '#FF9A4A', intensity: 0.8, full: false, room: 'Family room', title: 'Relax', light: 'Warm light', curtain: 'Curtains halfway', text: 'Warm light and curtains drawn halfway, the evening settling in.' },
+  master:  { color: 0xFFE2A0, hex: '#FFE2A0', intensity: 1.55, full: true, room: 'Party room', title: 'Master', light: 'Everything on', curtain: 'Curtains open', text: 'Everything up at once, the whole floor lit in a single press.' },
+  work:    { color: 0xBFE0FF, hex: '#BFE0FF', intensity: 1.1, full: false, room: 'Work room', title: 'Work', light: 'Cool white', curtain: 'Curtains closed', text: 'Cool white over the desk while the rest of the room steps back.' }
+};
+
+/* ---------- Three.js tower ---------- */
+const canvas = document.getElementById('stage');
+let three = null;
+function initThree() {
+  if (!window.THREE) return null;
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' }); }
+  catch (e) { return null; }
+  const mobile = innerWidth < 900;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, mobile ? 1.4 : 1.8));
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+
+  const scene = new THREE.Scene();
+  const BG = new THREE.Color(0x0B0D10);
+  scene.background = BG;
+  scene.fog = new THREE.FogExp2(0x0B0D10, 0.0085);
+  const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 600);
+
+  scene.add(new THREE.HemisphereLight(0x8aa2c0, 0x15110d, 0.55));
+  const moon = new THREE.DirectionalLight(0xc7d6ff, 0.75); moon.position.set(-60, 90, 40); scene.add(moon);
+  const warm = new THREE.PointLight(0xffb86b, 1.4, 60, 2); warm.position.set(6, 3, 14); scene.add(warm);
+  const warm2 = new THREE.PointLight(0xffb86b, 1.0, 50, 2); warm2.position.set(-12, 2, -10); scene.add(warm2);
+
+  // Window textures (canvas-generated)
+  function winTex(litRatio, seed) {
+    const c = document.createElement('canvas'); c.width = 512; c.height = 64;
+    const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, 512, 64);
+    let s = seed; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+    const cols = 16, w = 512 / cols;
+    for (let i = 0; i < cols; i++) {
+      if (rnd() < litRatio) {
+        const b = 0.55 + rnd() * 0.45; g.fillStyle = `rgba(255,255,255,${b})`;
+        g.fillRect(i * w + 3, 8, w - 6, 50);
+      }
+    }
+    const t = new THREE.CanvasTexture(c); t.encoding = THREE.sRGBEncoding; return t;
+  }
+  const texVariants = [winTex(.55, 11), winTex(.7, 29), winTex(.45, 47), winTex(.62, 83)];
+  const texFull = winTex(1.01, 5);
+
+  const root = new THREE.Group(); scene.add(root);
+
+  // Ground and site
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(900, 900), new THREE.MeshStandardMaterial({ color: 0x0d1013, roughness: 1 }));
+  ground.rotation.x = -Math.PI / 2; root.add(ground);
+  const grid = new THREE.GridHelper(80, 40, 0x2c3a35, 0x182020); grid.position.y = 0.02; grid.material.transparent = true; grid.material.opacity = .55; root.add(grid);
+  const plinth = new THREE.Mesh(new THREE.BoxGeometry(24, 0.5, 18), new THREE.MeshStandardMaterial({ color: 0x1a1f23, roughness: .9 }));
+  plinth.position.y = 0.25; root.add(plinth);
+
+  // Green belt: instanced trees along the front
+  const treeCount = mobile ? 90 : 170;
+  const crown = new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1.3, 0), new THREE.MeshStandardMaterial({ color: 0x1f4431, roughness: .85, flatShading: true }), treeCount);
+  const trunk = new THREE.InstancedMesh(new THREE.CylinderGeometry(.12, .16, 1.4, 5), new THREE.MeshStandardMaterial({ color: 0x2a2119 }), treeCount);
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), v = new THREE.Vector3(), sc = new THREE.Vector3();
+  let seed = 7; const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < treeCount; i++) {
+    const x = -46 + r() * 92, z = 16 + r() * 26, k = .7 + r() * .9;
+    v.set(x, 1.6 * k, z); sc.set(k, k * (1 + r() * .5), k); q.setFromEuler(new THREE.Euler(0, r() * 6, 0));
+    m4.compose(v, q, sc); crown.setMatrixAt(i, m4);
+    v.set(x, .7 * k, z); sc.set(k, k, k); m4.compose(v, new THREE.Quaternion(), sc); trunk.setMatrixAt(i, m4);
+  }
+  root.add(crown, trunk);
+
+  // Distant city blocks
+  const cityCount = mobile ? 110 : 220;
+  const cityTex = winTex(.35, 131); cityTex.wrapS = cityTex.wrapT = THREE.RepeatWrapping; cityTex.repeat.set(1, 6);
+  const city = new THREE.InstancedMesh(new THREE.BoxGeometry(1, 1, 1),
+    new THREE.MeshStandardMaterial({ color: 0x12161a, roughness: .9, emissive: 0xffd9a0, emissiveMap: cityTex, emissiveIntensity: .35 }), cityCount);
+  for (let i = 0; i < cityCount; i++) {
+    const a = r() * Math.PI * 2, d = 70 + r() * 150;
+    const x = Math.cos(a) * d, z = Math.sin(a) * d;
+    if (z > 10 && Math.abs(x) < 60) { i--; continue; }
+    const h = 8 + r() * (d < 120 ? 38 : 22), w = 7 + r() * 9;
+    v.set(x, h / 2, z); sc.set(w, h, w * (.8 + r() * .6)); q.setFromEuler(new THREE.Euler(0, r() * 1.5, 0));
+    m4.compose(v, q, sc); city.setMatrixAt(i, m4);
+  }
+  root.add(city);
+
+  // Stars
+  const starGeo = new THREE.BufferGeometry(); const sp = [];
+  for (let i = 0; i < 700; i++) { const a = r() * Math.PI * 2, e = .15 + r() * 1.2, d = 320; sp.push(Math.cos(a) * Math.cos(e) * d, Math.sin(e) * d, Math.sin(a) * Math.cos(e) * d); }
+  starGeo.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3));
+  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xcfd8e6, size: 1.1, sizeAttenuation: false, transparent: true, opacity: .7, fog: false })));
+
+  // The tower: G + 18 floors
+  const FLOORS = 19, W = 15, D = 9.5, GH = 2.2, FH = 1.36;
+  const tower = new THREE.Group(); root.add(tower);
+  const slabMat = new THREE.MeshStandardMaterial({ color: 0x9aa0a4, roughness: .85 });
+  const colMat = new THREE.MeshStandardMaterial({ color: 0x7c8286, roughness: .9 });
+  const finMat = new THREE.MeshStandardMaterial({ color: 0xb9a57c, roughness: .55, metalness: .35 });
+  const railMat = new THREE.MeshStandardMaterial({ color: 0x9fb4c0, roughness: .1, metalness: .2, transparent: true, opacity: .35 });
+  const glassMats = [];
+  const floors = [];
+  let y = 0.5;
+  for (let f = 0; f < FLOORS; f++) {
+    const h = f === 0 ? GH : FH;
+    const g = new THREE.Group(); g.position.y = y; tower.add(g);
+    const slab = new THREE.Mesh(new THREE.BoxGeometry(W + .8, .2, D + .8), slabMat); slab.position.y = .1; g.add(slab);
+    const bal = new THREE.Mesh(new THREE.BoxGeometry(W - 2, .12, 1.1), slabMat); bal.position.set(0, .06, D / 2 + .95); g.add(bal);
+    const rail = new THREE.Mesh(new THREE.BoxGeometry(W - 2, .55, .04), railMat); rail.position.set(0, .4, D / 2 + 1.48); g.add(rail);
+    const cols = new THREE.Group(); g.add(cols);
+    for (const cx of [-W / 2, -W / 6, W / 6, W / 2]) for (const cz of [-D / 2, D / 2]) {
+      const c = new THREE.Mesh(new THREE.BoxGeometry(.35, h - .2, .35), colMat); c.position.set(cx, .2 + (h - .2) / 2, cz); cols.add(c);
+    }
+    const gm = new THREE.MeshStandardMaterial({ color: 0x14202a, roughness: .15, metalness: .6, emissive: 0xF3EEDF, emissiveMap: f === 0 ? texFull : texVariants[f % 4], emissiveIntensity: 0 });
+    glassMats.push(gm);
+    const glass = new THREE.Mesh(new THREE.BoxGeometry(W - .3, h - .25, D - .3), gm); glass.position.y = .2 + (h - .25) / 2; g.add(glass);
+    floors.push({ g, slab, bal, rail, cols, glass, gm, y, h, base: f === 0 ? texFull : texVariants[f % 4] });
+    y += h;
+  }
+  const roof = new THREE.Group(); roof.position.y = y; tower.add(roof);
+  const roofSlab = new THREE.Mesh(new THREE.BoxGeometry(W + .8, .35, D + .8), slabMat); roofSlab.position.y = .17; roof.add(roofSlab);
+  const crownBox = new THREE.Mesh(new THREE.BoxGeometry(5, 2.4, 4), finMat); crownBox.position.set(-3, 1.5, -1); roof.add(crownBox);
+  const TOP = y;
+  // Vertical gold fins on the front face (signature of the render)
+  const fins = new THREE.Group(); tower.add(fins);
+  for (let i = 0; i < 9; i++) {
+    const fin = new THREE.Mesh(new THREE.BoxGeometry(.16, 1, .7), finMat);
+    fin.position.set(-W / 2 + 1 + i * ((W - 2) / 8), 0, D / 2 + 1.55); fins.add(fin);
+  }
+  const sideFin = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1, D + 2.6), finMat); sideFin.position.set(W / 2 + .7, 0, .6); fins.add(sideFin);
+
+  // Tower crane
+  const craneMat = new THREE.MeshStandardMaterial({ color: 0xE4B23C, roughness: .5, metalness: .3, emissive: 0x3a2a05, emissiveIntensity: .6 });
+  const crane = new THREE.Group(); crane.position.set(W / 2 + 5, 0, -D / 2 - 3.5); root.add(crane);
+  const mastGeo = new THREE.BoxGeometry(1, 1, 1);
+  const mast = new THREE.Mesh(mastGeo, craneMat); crane.add(mast);
+  const mastEdges = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.3, 1, 1.3, 1, 30, 1)), new THREE.LineBasicMaterial({ color: 0xE4B23C, transparent: true, opacity: .8 }));
+  crane.add(mastEdges);
+  const head = new THREE.Group(); crane.add(head);
+  const jib = new THREE.Mesh(new THREE.BoxGeometry(30, .7, .8), craneMat); jib.position.x = -9; head.add(jib);
+  const cjib = new THREE.Mesh(new THREE.BoxGeometry(9, .7, .8), craneMat); cjib.position.x = 10; head.add(cjib);
+  const cw = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.8, 1.4), new THREE.MeshStandardMaterial({ color: 0x3a4045 })); cw.position.set(12.8, -1, 0); head.add(cw);
+  const cab = new THREE.Mesh(new THREE.BoxGeometry(1.6, 1.4, 1.6), craneMat); cab.position.set(0, -.9, 1.1); head.add(cab);
+  const apex = new THREE.Mesh(new THREE.ConeGeometry(.8, 4, 4), craneMat); apex.position.y = 2.3; head.add(apex);
+  const beacon = new THREE.Mesh(new THREE.SphereGeometry(.28, 10, 10), new THREE.MeshBasicMaterial({ color: 0xff3b30 })); beacon.position.y = 4.5; head.add(beacon);
+  const trolley = new THREE.Group(); trolley.position.x = -16; head.add(trolley);
+  const cableGeo = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, -1, 0)]);
+  const cable = new THREE.Line(cableGeo, new THREE.LineBasicMaterial({ color: 0x9aa3a8 })); trolley.add(cable);
+  const load = new THREE.Mesh(new THREE.BoxGeometry(3.2, .25, 1.4), slabMat); trolley.add(load);
+
+  // Site floodlights (glow sprites)
+  const glowC = document.createElement('canvas'); glowC.width = glowC.height = 64;
+  const gg = glowC.getContext('2d'); const grd = gg.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grd.addColorStop(0, 'rgba(255,210,150,1)'); grd.addColorStop(1, 'rgba(255,210,150,0)'); gg.fillStyle = grd; gg.fillRect(0, 0, 64, 64);
+  const glowMat = new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(glowC), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+  glowMat.opacity = .55;
+  [[-12.5, 1.6, 9.5], [12.5, 1.6, 9.5], [-12.5, 1.6, -9.5]].forEach(p => { const s = new THREE.Sprite(glowMat); s.position.set(...p); s.scale.set(2.4, 2.4, 2.4); root.add(s); });
+
+  // Dust
+  const dustGeo = new THREE.BufferGeometry(); const dp = [];
+  for (let i = 0; i < 260; i++) dp.push(-25 + r() * 50, r() * 40, -18 + r() * 36);
+  dustGeo.setAttribute('position', new THREE.Float32BufferAttribute(dp, 3));
+  const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: 0xffe2b0, size: .09, transparent: true, opacity: .45 }));
+  root.add(dust);
+
+  // Camera keyframes over total page scroll
+  const KF = [
+    [0.00, -0.62, 66, 9, 13],
+    [0.10, -0.35, 58, 14, 15],
+    [0.24, 0.30, 50, 26, 19],
+    [0.36, 0.85, 44, 18, 17],
+    [0.50, 1.35, 62, 34, 13],
+    [0.64, 2.05, 110, 78, 6],
+    [0.78, 2.65, 74, 26, 15],
+    [1.00, 3.30, 62, 11, 17]
+  ];
+  const ease = t => t * t * (3 - 2 * t);
+  function camAt(s) {
+    let i = 0; while (i < KF.length - 2 && s > KF[i + 1][0]) i++;
+    const a = KF[i], b = KF[i + 1]; const t = ease(Math.min(1, Math.max(0, (s - a[0]) / (b[0] - a[0]))));
+    return a.map((x, k) => x + (b[k] - x) * t);
+  }
+  const cam = { a: KF[0][1], r: KF[0][2], y: KF[0][3], ty: KF[0][4] };
+  const look = new THREE.Vector3();
+  const curColor = new THREE.Color(MODES.routine.color); const tgtColor = new THREE.Color();
+  let curInt = MODES.routine.intensity, lastFull = false;
+
+  function layout() {
+    const w = innerWidth, h = innerHeight;
+    renderer.setSize(w, h, false); camera.aspect = w / h;
+    camera.fov = w < 700 ? 48 : 36; camera.updateProjectionMatrix();
+    // Push the tower to the right on wide screens so copy sits on the left
+    camera.clearViewOffset();
+    if (w > 900) camera.setViewOffset(w, h, -w * 0.2, 0, w, h);
+  }
+  layout();
+
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  function frame(time) {
+    const t = time || 0;
+    const build = Math.max(S.build, S.intro);
+    const fl = build * FLOORS;
+    // Floors
+    let topY = 0.5;
+    for (let f = 0; f < FLOORS; f++) {
+      const k = clamp(fl - f), F = floors[f];
+      const sK = ease(clamp(k / .35)), cK = ease(clamp((k - .15) / .45)), gK = ease(clamp((k - .45) / .5));
+      F.g.visible = k > 0.001;
+      F.slab.position.y = .1 + (1 - sK) * 7; F.slab.scale.set(.001 + sK * .999, 1, .001 + sK * .999);
+      F.bal.visible = F.rail.visible = gK > .02; F.bal.scale.x = F.rail.scale.x = Math.max(.001, gK);
+      F.cols.scale.y = Math.max(.001, cK);
+      F.glass.scale.set(1, Math.max(.001, gK), 1);
+      F.gm.emissiveIntensity = clamp((k - .9) / .1) * curInt;
+      if (k > 0.001) topY = F.y + F.h * Math.max(sK * .3, cK);
+    }
+    roof.visible = fl >= FLOORS - .02; roof.scale.y = roof.visible ? 1 : .001;
+    fins.children.forEach((fin, i) => {
+      const hgt = Math.max(.001, (topY - .5) * clamp(fl / FLOORS * 1.05));
+      fin.scale.y = hgt; fin.position.y = .5 + hgt / 2;
+    });
+    // Crane follows the build height
+    const mastH = Math.max(TOP * .45, topY + 9);
+    mast.scale.set(.55, mastH, .55); mast.position.y = mastH / 2;
+    mastEdges.scale.y = mastH; mastEdges.position.y = mastH / 2;
+    head.position.y = mastH + .4;
+    head.rotation.y = reduce ? .5 : Math.sin(t * .00018) * .9 + .4;
+    trolley.position.x = -10 - Math.sin(t * .0004) * 6;
+    const drop = Math.max(3, mastH - topY - 2 + (reduce ? 0 : Math.sin(t * .0007) * 2));
+    cable.scale.y = drop; load.position.y = -drop - .15;
+    load.visible = cable.visible = build < .999;
+    beacon.material.color.setHex(Math.sin(t * .004) > .2 || reduce ? 0xff3b30 : 0x3a0e0c);
+    dust.rotation.y = t * .00002; dust.position.y = reduce ? 0 : Math.sin(t * .0003) * .6;
+
+    // Lighting scene
+    const M = MODES[S.mode];
+    tgtColor.setHex(M.color); curColor.lerp(tgtColor, .06); curInt += (M.intensity - curInt) * .06;
+    if (M.full !== lastFull) { floors.forEach((F, i) => { F.gm.emissiveMap = M.full ? texFull : F.base; F.gm.needsUpdate = true; }); lastFull = M.full; }
+    glassMats.forEach(m => m.emissive.copy(curColor));
+
+    // Camera
+    const k = reduce ? KF[0].slice() : camAt(S.scroll);
+    const damp = reduce ? 1 : .055;
+    cam.a += (k[1] + S.mx * .08 - cam.a) * damp; cam.r += (k[2] - cam.r) * damp;
+    cam.y += (k[3] + S.my * 2 - cam.y) * damp; cam.ty += (k[4] - cam.ty) * damp;
+    camera.position.set(Math.sin(cam.a) * cam.r, cam.y, Math.cos(cam.a) * cam.r);
+    look.set(0, cam.ty, 0); camera.lookAt(look);
+    renderer.render(scene, camera);
+  }
+  return { frame, layout, TOP };
+}
+
+try { three = initThree(); } catch (e) { console.warn('3D scene unavailable', e); three = null; }
+if (!three) { canvas.hidden = true; document.getElementById('stage-fallback').hidden = false; }
+
+if (three) {
+  if (hasGsap) gsap.ticker.add(() => three.frame(performance.now()));
+  else { const loop = t => { three.frame(t); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { three.layout(); if (window.ScrollTrigger) ScrollTrigger.refresh(); }, 120); });
+  if (!reduce) addEventListener('pointermove', e => { S.mx = e.clientX / innerWidth - .5; S.my = e.clientY / innerHeight - .5; }, { passive: true });
+}
+
+/* ---------- Scroll choreography ---------- */
+const lvl = document.getElementById('lvl'), bar = document.getElementById('bar'), facts = [...document.querySelectorAll('.fact')];
+function setLevel(b) {
+  const f = Math.min(18, Math.floor(b * 19 - .2));
+  lvl.textContent = f <= 0 ? 'G' : String(f).padStart(2, '0');
+  bar.style.transform = `scaleX(${b})`;
+  facts.forEach(el => el.classList.toggle('on', b >= +el.dataset.at));
+}
+if (hasGsap && window.ScrollTrigger) {
+  ScrollTrigger.create({ start: 0, end: 'max', onUpdate: s => { S.scroll = s.progress; } });
+  if (!reduce) {
+    // Load intro: pour the first floors
+    gsap.to(S, { intro: .22, duration: 2.6, ease: 'power2.out', delay: .2, onUpdate: () => setLevel(Math.max(S.intro, S.build)) });
+    gsap.from('[data-in]', { y: 36, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: .09, delay: .15 });
+    ScrollTrigger.create({
+      trigger: '#build', start: 'top top', end: 'bottom bottom', pin: '.build-pin', pinSpacing: false,
+      onUpdate: s => { S.build = .22 + s.progress * .78; setLevel(Math.max(S.intro, S.build)); },
+      onLeave: () => { S.build = 1; setLevel(1); }
+    });
+    ScrollTrigger.create({ trigger: '#build', start: 'bottom bottom', onEnter: () => { S.build = 1; } , onLeaveBack: () => {} });
+    gsap.utils.toArray('[data-rv]').forEach(el => {
+      gsap.from(el, { y: 50, opacity: .08, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } });
+    });
+    // Price counts down from the old price once
+    const pc = document.getElementById('price-count'); const o = { v: 11600 };
+    ScrollTrigger.create({ trigger: '#price', start: 'top 60%', once: true, onEnter: () => gsap.to(o, { v: 10600, duration: 1.6, ease: 'power3.out', onUpdate: () => { pc.textContent = '₹' + Math.round(o.v).toLocaleString('en-IN'); } }) });
+  } else { S.build = 1; setLevel(1); }
+} else { S.build = 1; setLevel(1); }
+
+/* ---------- Scene switcher ---------- */
+const modeBtns = [...document.querySelectorAll('.mode')];
+function setMode(m) {
+  S.mode = m; const M = MODES[m];
+  modeBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === m)));
+  document.getElementById('mc-room').textContent = M.room;
+  document.getElementById('mc-title').textContent = M.title;
+  document.getElementById('mc-text').textContent = M.text;
+  document.getElementById('mc-light').textContent = M.light;
+  document.getElementById('mc-curtain').textContent = M.curtain;
+  document.getElementById('mc-sw').style.setProperty('--c', M.hex);
+  if (hasGsap && !reduce) gsap.fromTo('.mode-card h3, .mode-card p', { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: 'expo.out', stagger: .05 });
+}
+modeBtns.forEach((b, i) => {
+  b.addEventListener('click', () => setMode(b.dataset.mode));
+  b.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    const n = modeBtns[(i + (e.key === 'ArrowRight' ? 1 : modeBtns.length - 1)) % modeBtns.length]; n.focus(); setMode(n.dataset.mode);
+  });
+});
+
+/* ---------- Unit plans (drawn to scale in mm) ---------- */
+const UNITS = {
+  1: {
+    w: 6800, h: 7925,
+    areas: { sale: ['964', '89.60'], built: ['593', '55.10'], carpet: ['456', '42.32'] },
+    rooms: [
+      { n: 'Balcony', x: 1300, y: 0, w: 5500, h: 1500, d: '5500 x 1500', ft: "18'0\" x 4'11\"", c: 'bal' },
+      { n: 'Living', x: 0, y: 1500, w: 3400, h: 4025, d: '3400 x 4025', ft: "11'2\" x 13'3\"" },
+      { n: 'Bedroom', x: 3400, y: 1500, w: 3400, h: 4025, d: '3400 x 4025', ft: "11'2\" x 13'3\"" },
+      { n: 'Kitchenette', x: 0, y: 5525, w: 3100, h: 2400, d: '3100 x 2400', ft: "10'2\" x 7'11\"", c: 'wet' },
+      { n: 'Toilet', x: 3100, y: 5525, w: 3700, h: 2300, d: '3700 x 2300', ft: "12'2\" x 7'7\"", c: 'wet' }
+    ]
+  },
+  2: {
+    w: 10150, h: 7925,
+    areas: { sale: ['1,454', '135.12'], built: ['906', '84.23'], carpet: ['688', '63.92'] },
+    rooms: [
+      { n: 'Toilet', x: 0, y: 0, w: 3400, h: 2400, c: 'wet', d: '', ft: '' },
+      { n: 'Kitchenette', x: 3400, y: 0, w: 3040, h: 2400, d: '3040 x 2400', ft: "10'0\" x 7'11\"", c: 'wet' },
+      { n: 'Toilet', x: 6500, y: 100, w: 3650, h: 2300, d: '3650 x 2300', ft: "12'0\" x 7'7\"", c: 'wet' },
+      { n: 'Bedroom', x: 0, y: 2400, w: 3400, h: 4025, d: '3400 x 4025', ft: "11'2\" x 13'3\"" },
+      { n: 'Living', x: 3400, y: 2400, w: 3400, h: 4025, d: '3400 x 4025', ft: "11'2\" x 13'3\"" },
+      { n: 'Bedroom', x: 6800, y: 2400, w: 3350, h: 4025, d: '3350 x 4025', ft: "11'0\" x 13'3\"" },
+      { n: 'Balcony', x: 575, y: 6425, w: 9000, h: 1500, d: '9000 x 1500', ft: "29'7\" x 4'11\"", c: 'bal' }
+    ]
+  }
+};
+const svg = document.getElementById('plan'), roomsEl = document.getElementById('rooms');
+const NS = 'http://www.w3.org/2000/svg';
+function drawPlan(u) {
+  const U = UNITS[u], pad = 250;
+  svg.setAttribute('viewBox', `${-pad} ${-pad} ${U.w + pad * 2} ${U.h + pad * 2}`);
+  svg.innerHTML = '';
+  roomsEl.innerHTML = '';
+  const fs = u === 1 ? 300 : 330;
+  U.rooms.forEach((R, i) => {
+    const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'r');
+    const rect = document.createElementNS(NS, 'rect');
+    Object.entries({ x: R.x, y: R.y, width: R.w, height: R.h, class: 'room ' + (R.c || '') }).forEach(([k, val]) => rect.setAttribute(k, val));
+    g.appendChild(rect);
+    const t = document.createElementNS(NS, 'text'); t.setAttribute('x', R.x + R.w / 2); t.setAttribute('y', R.y + R.h / 2 - (R.d ? fs * .2 : -fs * .3)); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', fs); t.textContent = R.n; g.appendChild(t);
+    if (R.d) { const d = document.createElementNS(NS, 'text'); d.setAttribute('class', 'd'); d.setAttribute('x', R.x + R.w / 2); d.setAttribute('y', R.y + R.h / 2 + fs * 1.05); d.setAttribute('text-anchor', 'middle'); d.setAttribute('font-size', fs * .72); d.textContent = R.d; g.appendChild(d); }
+    svg.appendChild(g);
+    if (R.d) {
+      const row = document.createElement('div');
+      const a = document.createElement('span'); a.textContent = R.n;
+      const b = document.createElement('span'); b.textContent = `${R.ft}  (${R.d} mm)`;
+      row.append(a, b); roomsEl.appendChild(row);
+      row.addEventListener('mouseenter', () => g.classList.add('hl')); row.addEventListener('mouseleave', () => g.classList.remove('hl'));
+    }
+    if (hasGsap && !reduce) {
+      const len = 2 * (R.w + R.h);
+      rect.style.strokeDasharray = R.c === 'bal' ? '' : len; rect.style.strokeDashoffset = R.c === 'bal' ? 0 : len;
+      gsap.to(rect, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: i * .08, onComplete: () => { if (R.c !== 'bal') rect.style.strokeDasharray = ''; } });
+      gsap.from([...g.querySelectorAll('text')], { opacity: 0, y: 120, duration: .6, delay: .5 + i * .08, ease: 'expo.out' });
+    }
+  });
+  const A = U.areas;
+  const set = (id, v, m) => { const el = document.getElementById(id); el.firstChild.textContent = v; document.getElementById(id + '-m').textContent = m + ' sq.m'; };
+  set('a-sale', A.sale[0], A.sale[1]); set('a-built', A.built[0], A.built[1]); set('a-carpet', A.carpet[0], A.carpet[1]);
+}
+const segBtns = [...document.querySelectorAll('.seg button')];
+segBtns.forEach(b => b.addEventListener('click', () => {
+  segBtns.forEach(x => x.setAttribute('aria-selected', String(x === b)));
+  drawPlan(+b.dataset.unit);
+}));
+drawPlan(1);
+
+/* ---------- Enquiry form: opens WhatsApp with the details filled in ---------- */
+const WHATSAPP_NUMBER = '919990751185'; // country code + number, digits only
+const form = document.getElementById('enq'), statusEl = document.getElementById('f-status'), submit = document.getElementById('f-submit');
+document.getElementById('f-date').min = new Date().toISOString().slice(0, 10);
+function fieldErr(id, msg) {
+  const inp = document.getElementById('f-' + id), e = document.getElementById('e-' + id);
+  e.textContent = msg || ''; inp.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg;
+}
+function showStatus(kind, msg) { statusEl.hidden = false; statusEl.className = 'status ' + kind; statusEl.textContent = msg; }
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  const name = String(fd.get('name') || '').trim(), phone = String(fd.get('phone') || '').trim(), email = String(fd.get('email') || '').trim();
+  const digits = phone.replace(/\D/g, '');
+  const ok = [
+    fieldErr('name', name.length < 2 ? 'Enter your full name.' : ''),
+    fieldErr('phone', digits.length < 10 || digits.length > 13 ? 'Enter a 10-digit mobile number, with or without +91.' : ''),
+    fieldErr('email', email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'Check the email address, e.g. you@example.com.' : '')
+  ];
+  if (ok.includes(false)) { const first = form.querySelector('[aria-invalid="true"]'); first && first.focus(); return; }
+  const visit = String(fd.get('visit') || ''), msg = String(fd.get('message') || '').trim();
+  const lines = [
+    'Hi, I would like to enquire about SYNQ, IQ Suites by Highlife.',
+    '', 'Name: ' + name, 'Phone: ' + phone,
+    email ? 'Email: ' + email : '', 'Interested in: ' + (fd.get('unit') || ''),
+    visit ? 'Preferred visit date: ' + visit : '', msg ? 'Message: ' + msg : ''
+  ].filter((l, i) => l !== '' || i === 1);
+  const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+  const win = window.open(url, '_blank', 'noopener');
+  if (!win) location.href = url;
+  showStatus('ok', 'WhatsApp is opening with your enquiry filled in. Press send there to reach the sales team.');
+});
+})();
+</script>
+
+</body>
+</html>
