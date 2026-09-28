@@ -313,34 +313,14 @@ section{padding-inline:var(--gutter);position:relative}
 .marquee:hover .track{animation-play-state:paused}
 @keyframes slide{to{transform:translateX(-50%)}}
 
-/* Rate sheet */
-.rates-sec{padding-block:clamp(72px,10vw,120px)}
-.sheet{background:var(--white);border:1px solid var(--line-2);display:grid;grid-template-columns:220px minmax(0,1fr)}
-.sheet-side{background:var(--silk);border-right:1px solid var(--line-2);display:grid;align-content:center;justify-items:center;gap:14px;padding:28px 18px;text-align:center}
-.sheet-side .ico{width:64px;height:64px;border:1px solid var(--gold);display:grid;place-items:center}
-.sheet-side .ico svg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.2}
-.sheet-side b{font:500 22px/1.2 var(--display);letter-spacing:.2em;text-transform:uppercase}
-.sheet-side span{font:400 10.5px/1.4 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-table.rates{width:100%;border-collapse:collapse;font-variant-numeric:lining-nums tabular-nums}
-.rates caption{caption-side:top;text-align:center;padding:16px;background:var(--ink);color:#fff;font:500 16px/1 var(--display);letter-spacing:.24em;text-transform:uppercase}
-.rates thead th{background:#2A2825;color:#fff;font:400 12px/1.35 var(--display);letter-spacing:.14em;text-transform:uppercase;padding:16px 14px;text-align:center;border-left:1px solid rgba(255,255,255,.14)}
-.rates thead th:first-child{border-left:0;text-align:left;padding-left:24px}
-.rates tbody td{padding:16px 14px;text-align:center;border-top:1px solid var(--line);font-size:16.5px}
-.rates tbody td + td{border-left:1px solid var(--line)}
-.rates tbody td:first-child{text-align:left;padding-left:24px;font:400 14.5px/1.35 var(--display);letter-spacing:.04em}
-.rates tbody td.rate{font:500 18px/1 var(--display);color:var(--ink)}
-.rates tbody td.na{color:var(--muted);font-size:14px;letter-spacing:.1em}
-.rates tbody tr:nth-child(even) td{background:#FAF8F4}
-.rates tbody tr:hover td{background:var(--gold-soft)}
-.rates-note{margin-top:14px;font-size:13.5px;color:var(--muted);text-align:center}
-.incl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(40px,5vw,56px);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+/* Inclusions */
+.rates-sec{padding-block:clamp(56px,8vw,96px)}
+.incl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
 .incl div{padding:22px 16px;text-align:center;display:grid;gap:6px;align-content:start}
 .incl div + div{border-left:1px solid var(--line)}
 .incl span{font:400 10.5px/1 var(--display);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .incl b{font:400 17px/1.3 var(--display);letter-spacing:.08em;text-transform:uppercase}
 .incl small{font-size:13px;color:var(--muted)}
-.incl-head{text-align:center;margin-top:clamp(40px,5vw,56px);font:400 12px/1 var(--display);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
-.incl-head + .incl{margin-top:16px}
 
 /* Enquiry */
 .enquire{padding-block:clamp(72px,10vw,120px)}
@@ -430,8 +410,6 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
   .floorplan figure{border-right:0;border-bottom:1px solid var(--line)}
   .fp-facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
   .fp-facts h3{grid-column:1/-1}
-  .sheet{grid-template-columns:minmax(0,1fr)}
-  .sheet-side{border-right:0;border-bottom:1px solid var(--line-2);grid-auto-flow:column;justify-content:center;padding:18px}
   .enq-side{min-height:300px}
 }
 @media (max-width: 640px){
@@ -456,18 +434,11 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
   .incl div:nth-child(odd){border-left:0}
   .incl div:nth-child(even){border-left:1px solid var(--line)}
   .incl div:nth-child(n+3){border-top:1px solid var(--line)}
+  .incl div:last-child:nth-child(odd){grid-column:1/-1;border-left:0}
   .level #lvl{font-size:clamp(90px,26vw,130px)}
   .build h2{font-size:20px}
   .foot{grid-template-columns:minmax(0,1fr)}
   .foot .call{text-align:left}
-  /* Rate sheet becomes one card per floor */
-  .rates thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-  .rates tbody tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line-2)}
-  .rates tbody td{display:grid;gap:6px;border:0!important;padding:12px 10px;font-size:15.5px}
-  .rates tbody td::before{content:attr(data-label);font:400 9.5px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-  .rates tbody td:first-child{grid-column:1/-1;padding:16px 14px 4px;font-size:15px;font-weight:500}
-  .rates tbody td:first-child::before{content:none}
-  .rates tbody td.rate{font-size:17px}
 }
 @media (prefers-reduced-motion: reduce){
   .track{animation:none}
@@ -485,7 +456,6 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
       <a href="#location">Location</a>
       <a href="#gallery">Gallery</a>
       <a href="#homes">Homes</a>
-      <a href="#rates">Rate sheet</a>
     </nav>
     <a class="brand" href="#top" aria-label="SYNQ home"><b>SYNQ</b><span>IQ Suites by High Life</span></a>
     <div class="nav-right">
@@ -517,7 +487,7 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
         <p class="lede" data-in>A home that runs by itself. You just live in it.</p>
         <div class="cta" data-in>
           <a class="btn btn-gold" href="#enquire">Enquire now</a>
-          <a class="btn btn-grey" href="#rates">View rate sheet</a>
+          <a class="btn btn-grey" href="#homes">See unit plans</a>
         </div>
         <p class="foot" data-in>Schedule your site visit today</p>
       </div>
@@ -802,40 +772,13 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
     </div>
   </div>
 
-  <!-- RATE SHEET -->
-  <section class="rates-sec" id="rates" aria-labelledby="rates-h">
+  <!-- INCLUSIONS -->
+  <section class="rates-sec" id="included" aria-labelledby="incl-h">
     <div class="wrap">
       <div class="title">
-        <h2 id="rates-h" data-rv>Project rate sheet</h2>
+        <h2 id="incl-h" data-rv>Included with every SYNQ home</h2>
         <div class="rule" aria-hidden="true"><i></i></div>
       </div>
-      <div class="sheet" data-rv>
-        <div class="sheet-side" aria-hidden="true">
-          <div class="ico"><svg viewBox="0 0 40 40"><path d="M6 36h28M9 36V14l9-4v26M18 36V6l13 5v25M22 14h5M22 19h5M22 24h5M22 29h5M12 18h3M12 23h3M12 28h3"/></svg></div>
-          <b>Jewel<br>Crest</b>
-          <span>Floor-wise rates</span>
-        </div>
-        <div style="overflow-x:auto">
-          <table class="rates">
-            <caption>Jewel Crest</caption>
-            <thead>
-              <tr><th scope="col">Floor</th><th scope="col">AR MG rate (&#8377;)</th><th scope="col">Rental for 2 years (&#8377;)</th><th scope="col">CAP (&#8377;)</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Lower Ground Floor (Anchor)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;38,000</td><td data-label="Rental for 2 years (&#8377;)">200</td><td class="na" data-label="CAP (&#8377;)">NA</td></tr>
-              <tr><td>Ground Floor</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;55,000</td><td class="na" data-label="Rental for 2 years (&#8377;)">NA</td><td data-label="CAP (&#8377;)">&#8377;44,000</td></tr>
-              <tr><td>First Floor</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;40,000</td><td data-label="Rental for 2 years (&#8377;)">215</td><td data-label="CAP (&#8377;)">&#8377;30,000</td></tr>
-              <tr><td>Second Floor</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;36,000</td><td data-label="Rental for 2 years (&#8377;)">200</td><td data-label="CAP (&#8377;)">&#8377;28,000</td></tr>
-              <tr><td>Third Floor (Restaurants)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;29,500</td><td class="na" data-label="Rental for 2 years (&#8377;)">NA</td><td data-label="CAP (&#8377;)">&#8377;26,000</td></tr>
-              <tr><td>Third Floor (Food Court)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;35,000</td><td data-label="Rental for 2 years (&#8377;)">180</td><td data-label="CAP (&#8377;)">&#8377;26,500</td></tr>
-              <tr><td>Third Floor (Anchor)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;36,000</td><td data-label="Rental for 2 years (&#8377;)">190</td><td class="na" data-label="CAP (&#8377;)">NA</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <p class="rates-note">Rates as per the Jewel Crest project rate sheet. Call +91 99994 34837 for the full price list and current availability.</p>
-
-      <p class="incl-head">Included with every SYNQ home</p>
       <div class="incl">
         <div data-rv><span>Included</span><b>Fully furnished</b><small>Move in with just your bags</small></div>
         <div data-rv><span>Free</span><b>Power backup</b></div>
@@ -887,7 +830,6 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
           <div class="chips">
             <label><input type="radio" name="unit" id="f-u1" value="1 BHK" checked><span>1 BHK</span></label>
             <label><input type="radio" name="unit" id="f-u2" value="2 BHK"><span>2 BHK</span></label>
-            <label><input type="radio" name="unit" id="f-u3" value="Jewel Crest commercial"><span>Commercial</span></label>
             <label><input type="radio" name="unit" id="f-u4" value="Not sure yet"><span>Not sure yet</span></label>
           </div>
         </fieldset>
@@ -910,7 +852,7 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
     <img src="img/logo-dark.webp" alt="Moneytree Realty" width="520" height="130">
     <p>SYNQ, IQ Suites by High Life, Aspire Dream Valley Phase III, Techzone-4, Greater Noida West. Presented by Moneytree Realty with Great Value Realty and Sanskar Realty (Yatharth Group), authorised marketing partners. Built by NBCC (India) Ltd.</p>
     <a class="call num" href="tel:+919999434837"><small>Sales enquiries</small>+91 99994 34837</a>
-    <p class="legal">Rates are as per the Jewel Crest project rate sheet and may change without notice. Offers and inclusions are as mentioned in the official price list. All images are artistic impressions.</p>
+    <p class="legal">Offers and inclusions are as mentioned in the official price list and may change without notice. All images are artistic impressions.</p>
   </div>
 </footer>
 
@@ -982,7 +924,6 @@ if (hasGsap && !reduce) {
   });
   setLevel(.2);
   gsap.utils.toArray('[data-rv]').forEach(el => gsap.from(el, { y: 36, opacity: .1, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } }));
-  gsap.from('.rates tbody tr', { opacity: 0, x: -16, duration: .7, ease: 'expo.out', stagger: .07, scrollTrigger: { trigger: '.rates', start: 'top 80%', once: true } });
   gsap.from('.timeline div', { opacity: 0, y: 20, duration: .8, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: '.timeline', start: 'top 85%', once: true } });
 } else { setLevel(1); }
 
