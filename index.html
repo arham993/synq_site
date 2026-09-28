@@ -140,7 +140,39 @@ section{padding-inline:var(--gutter);position:relative}
 .feats b{font:400 clamp(20px,1.8vw,26px)/1.25 var(--display);letter-spacing:.06em}
 .feats span{font-size:14.5px;color:var(--muted);line-height:1.5}
 
-/* Build (pinned): render revealed from the ground up */
+/* Why not your home */
+.why{padding-block:0 clamp(72px,10vw,120px)}
+.why-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.why-grid > div{padding:26px 22px;display:grid;gap:8px;align-content:start}
+.why-grid > div + div{border-left:1px solid var(--line)}
+.why-grid b{font:400 clamp(20px,1.9vw,26px)/1.2 var(--display);letter-spacing:.14em;text-transform:uppercase}
+.why-grid b em{font-style:normal;color:var(--gold)}
+.why-grid span{font-size:15px;color:var(--muted)}
+.why-q{text-align:center;margin-top:clamp(32px,4vw,48px);display:grid;gap:10px;justify-items:center}
+.why-q h2{font-size:clamp(28px,3.4vw,46px);letter-spacing:.14em;text-transform:uppercase;line-height:1.2}
+.why-q h2 em{font-style:normal;color:var(--gold)}
+.why-q p{font:400 15px/1.4 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-2)}
+
+/* Experience */
+.exp{padding-block:0 clamp(72px,10vw,120px)}
+.exp-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line-2)}
+.exp-grid > div{padding:24px 18px 26px;display:grid;gap:8px;align-content:start;border-bottom:1px solid var(--line-2)}
+.exp-grid > div:not(:nth-child(5n+1)){border-left:1px solid var(--line)}
+.exp-grid b{font:500 13px/1.35 var(--display);letter-spacing:.12em;text-transform:uppercase}
+.exp-grid b::before{content:"";display:block;width:18px;height:1px;background:var(--gold);margin-bottom:14px}
+.exp-grid span{font-size:14.5px;color:var(--muted);line-height:1.5}
+
+/* Typical floor */
+.floorplan{margin-top:clamp(40px,5vw,64px);border:1px solid var(--line-2);background:var(--white);display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr)}
+.floorplan figure{margin:0;padding:clamp(14px,2vw,24px);border-right:1px solid var(--line);overflow-x:auto}
+.floorplan img{display:block;width:100%;min-width:640px;height:auto}
+.fp-facts{padding:28px;display:grid;gap:20px;align-content:center}
+.fp-facts h3{font-size:18px;letter-spacing:.2em;text-transform:uppercase}
+.fp-facts div{display:grid;gap:4px}
+.fp-facts b{font:300 clamp(40px,4vw,56px)/1 var(--display);color:var(--gold)}
+.fp-facts span{font:400 11.5px/1.4 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2)}
+
+
 .build{height:250vh;padding:0}
 .build-pin{height:100vh;height:100dvh;display:flex;align-items:center;padding:calc(var(--head) + 16px) var(--gutter) 16px}
 .build-grid{width:100%;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
@@ -366,6 +398,9 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
   .loc:nth-child(even){border-left:1px solid var(--line)}
   .incl{grid-template-columns:repeat(3,minmax(0,1fr))}
   .incl div:nth-child(4){border-left:0}
+  .exp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .exp-grid > div:not(:nth-child(5n+1)){border-left:0}
+  .exp-grid > div:nth-child(even){border-left:1px solid var(--line)}
 }
 @media (max-width: 900px){
   :root{--head:64px}
@@ -391,6 +426,10 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
   .system-grid{grid-template-columns:minmax(0,1fr)}
   .cluster + .cluster{border-left:0;border-top:1px solid var(--line)}
   .plan-box{border-right:0;border-bottom:1px solid var(--line)}
+  .floorplan{grid-template-columns:minmax(0,1fr)}
+  .floorplan figure{border-right:0;border-bottom:1px solid var(--line)}
+  .fp-facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .fp-facts h3{grid-column:1/-1}
   .sheet{grid-template-columns:minmax(0,1fr)}
   .sheet-side{border-right:0;border-bottom:1px solid var(--line-2);grid-auto-flow:column;justify-content:center;padding:18px}
   .enq-side{min-height:300px}
@@ -407,6 +446,11 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
   .feats{grid-template-columns:minmax(0,1fr)}
   .feats > div + div{border-left:0;border-top:1px solid var(--line)}
   .tabs .btn{min-width:0;flex:1}
+  .why-grid{grid-template-columns:minmax(0,1fr)}
+  .why-grid > div + div{border-left:0;border-top:1px solid var(--line)}
+  .exp-grid{grid-template-columns:minmax(0,1fr)}
+  .exp-grid > div:nth-child(even){border-left:0}
+  .fp-facts{grid-template-columns:minmax(0,1fr)}
   .row2{grid-template-columns:minmax(0,1fr)}
   .incl{grid-template-columns:repeat(2,minmax(0,1fr))}
   .incl div:nth-child(odd){border-left:0}
@@ -470,7 +514,7 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
         <p class="by" data-in>by<b>High Life</b></p>
         <p class="loc" data-in>Techzone-4, Greater Noida West</p>
         <h1 data-in>1 &amp; 2 BHK AI smart homes, fully furnished</h1>
-        <p class="lede" data-in>A home that runs itself, facing a 100 metre green belt and built by NBCC.</p>
+        <p class="lede" data-in>A home that runs by itself. You just live in it.</p>
         <div class="cta" data-in>
           <a class="btn btn-gold" href="#enquire">Enquire now</a>
           <a class="btn btn-grey" href="#rates">View rate sheet</a>
@@ -493,6 +537,21 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
         <div data-rv><b>100 m green belt</b><span>Fully developed, directly in front of the tower</span></div>
         <div data-rv><b class="num">130 m road</b><span>Frontage on the Noida and Greater Noida Link Road</span></div>
         <div data-rv><b>1 &amp; 2 BHK</b><span>Fully furnished smart studio residences</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NOT YOUR HOME -->
+  <section class="why" aria-labelledby="why-h">
+    <div class="wrap">
+      <div class="why-grid">
+        <div data-rv><b>Phone <em>smart</em></b><span>AI unlocks it with your face and answers whatever you ask, anywhere.</span></div>
+        <div data-rv><b>Car <em>smart</em></b><span>Parking assist, lane assist and the shortest route with live traffic.</span></div>
+        <div data-rv><b>Apps <em>smart</em></b><span>Your reels, your next show and your playlists, all picked by AI.</span></div>
+      </div>
+      <div class="why-q">
+        <h2 id="why-h" data-rv>So why not <em>your home?</em></h2>
+        <p data-rv>One screen. One voice. From anywhere.</p>
       </div>
     </div>
   </section>
@@ -627,6 +686,28 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section class="exp" aria-labelledby="exp-h">
+    <div class="wrap">
+      <div class="title">
+        <h2 id="exp-h" data-rv>What it changes, every day</h2>
+        <span class="sub" data-rv>Things you feel from day one</span>
+      </div>
+      <div class="exp-grid">
+        <div data-rv><b>One room, four identities</b><span>Guest, family, party or work room at a tap.</span></div>
+        <div data-rv><b>Control from anywhere</b><span>Remote access from anywhere in the world.</span></div>
+        <div data-rv><b>Shockproof switches</b><span>Touch glass with no exposed mechanical contacts.</span></div>
+        <div data-rv><b>Geofencing</b><span>The home knows when you are near or far.</span></div>
+        <div data-rv><b>Motorised curtains</b><span>By light, time or voice, and energy saved.</span></div>
+        <div data-rv><b>Voice commands</b><span>Effortless living, no app and no switch.</span></div>
+        <div data-rv><b>AC control via app</b><span>Turn on the AC before you are even home.</span></div>
+        <div data-rv><b>Energy saving, built in</b><span>A real cut in the monthly utility bill.</span></div>
+        <div data-rv><b>Complete peace of mind</b><span>Sensors and cameras, never unmonitored.</span></div>
+        <div data-rv><b>Welcome and away scenes</b><span>One tap as you walk in or leave.</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- SYSTEM -->
   <section class="system" aria-labelledby="sys-h">
     <div class="wrap">
@@ -688,6 +769,17 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
           <div class="rooms" id="rooms"></div>
         </div>
       </div>
+      <div class="floorplan" data-rv>
+        <figure>
+          <img src="img/typical-floor.webp" alt="Typical floor plan with homes 01 to 13 around a central corridor, lift lobbies at both ends" width="1377" height="674" loading="lazy">
+        </figure>
+        <div class="fp-facts">
+          <h3>Typical floor</h3>
+          <div><b class="num">13</b><span>Homes per floor, 12 &times; 1 BHK and 1 &times; 2 BHK</span></div>
+          <div><b class="num">1850</b><span>mm wide central corridor</span></div>
+          <div><b class="num">2</b><span>Lift lobbies, one at each end</span></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -705,8 +797,8 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
   </section>
   <div class="marquee" aria-label="Amenities">
     <div class="track">
-      <span>Club with swimming pool</span><span>Green landscape area</span><span>Toddlers' play area</span><span>Lawn</span><span>Water feature</span><span>Topiary garden</span><span>Chip and putt</span><span>Sit-out plaza</span><span>Senior citizen garden</span><span>Stepped seating</span><span>Multiplay court</span><span>Deck seating</span><span>Jogging track</span>
-      <span aria-hidden="true">Club with swimming pool</span><span aria-hidden="true">Green landscape area</span><span aria-hidden="true">Toddlers' play area</span><span aria-hidden="true">Lawn</span><span aria-hidden="true">Water feature</span><span aria-hidden="true">Topiary garden</span><span aria-hidden="true">Chip and putt</span><span aria-hidden="true">Sit-out plaza</span><span aria-hidden="true">Senior citizen garden</span><span aria-hidden="true">Stepped seating</span><span aria-hidden="true">Multiplay court</span><span aria-hidden="true">Deck seating</span><span aria-hidden="true">Jogging track</span>
+      <span>Club with swimming pool</span><span>Green landscape area</span><span>Toddlers' play area</span><span>Lawn</span><span>Water feature</span><span>Topiary garden</span><span>Chip and putt</span><span>Sit-out plaza</span><span>Senior citizen garden</span><span>Stepped seating</span><span>Multiplay court</span><span>Swimming pool</span><span>Water feature and deck seating</span><span>Jogging track</span>
+      <span aria-hidden="true">Club with swimming pool</span><span aria-hidden="true">Green landscape area</span><span aria-hidden="true">Toddlers' play area</span><span aria-hidden="true">Lawn</span><span aria-hidden="true">Water feature</span><span aria-hidden="true">Topiary garden</span><span aria-hidden="true">Chip and putt</span><span aria-hidden="true">Sit-out plaza</span><span aria-hidden="true">Senior citizen garden</span><span aria-hidden="true">Stepped seating</span><span aria-hidden="true">Multiplay court</span><span aria-hidden="true">Swimming pool</span><span aria-hidden="true">Water feature and deck seating</span><span aria-hidden="true">Jogging track</span>
     </div>
   </div>
 
