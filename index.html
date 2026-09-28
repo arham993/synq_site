@@ -356,6 +356,10 @@ fieldset{border:0;margin:0;padding:0}
 .form-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
 .form-foot .help{max-width:32ch}
 .status{padding:14px 16px;font-size:15px;border:1px solid var(--gold);background:var(--gold-soft)}
+.status.bad{border-color:var(--danger);background:#FBEDEA}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.spin{width:14px;height:14px;border-radius:50%;border:1.5px solid currentColor;border-right-color:transparent;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
 
 /* Footer */
 footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line-2);background:var(--footer)}
@@ -797,10 +801,11 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
         <div class="over">
           <small>Talk to the sales team</small>
           <a class="num" href="tel:+919999434837">+91 99994 34837</a>
-          <p>Call or send your details on WhatsApp for the price list, floor availability and a site visit slot.</p>
+          <p>Call, or leave your details and the team will call you back with the price list, floor availability and a site visit slot.</p>
         </div>
       </div>
       <form class="enq" id="enq" novalidate>
+        <div class="hp" aria-hidden="true"><label for="f-website">Leave this empty</label><input id="f-website" name="website" tabindex="-1" autocomplete="off"></div>
         <h2 id="enq-h">Enquire now</h2>
         <div class="row2">
           <div class="field">
@@ -838,7 +843,7 @@ footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));b
           <textarea id="f-msg" name="message" placeholder="Anything we should know, e.g. preferred floor or a time to call"></textarea>
         </div>
         <div class="form-foot">
-          <p class="help">Sends your enquiry to the sales team on WhatsApp.</p>
+          <p class="help">Your details go only to the SYNQ sales team.</p>
           <button class="btn btn-gold" type="submit" id="f-submit">Submit</button>
         </div>
         <div class="status" id="f-status" hidden role="status"></div>
@@ -1030,13 +1035,16 @@ const segBtns = [...document.querySelectorAll('.seg button')];
 segBtns.forEach(b => b.addEventListener('click', () => { segBtns.forEach(x => x.setAttribute('aria-selected', String(x === b))); drawPlan(+b.dataset.unit); }));
 drawPlan(1);
 
-/* Enquiry form: opens WhatsApp with the details filled in */
-const WHATSAPP_NUMBER = '919999434837';
-const form = document.getElementById('enq'), statusEl = document.getElementById('f-status');
+/* Enquiry form: each enquiry is added as a new row in the SYNQ Google Sheet */
+const SHEET_URL = '__SHEET_URL__'; // Google Apps Script web app URL (see google-sheet/Code.gs)
+const form = document.getElementById('enq'), statusEl = document.getElementById('f-status'), submitBtn = document.getElementById('f-submit');
 document.getElementById('f-date').min = new Date().toISOString().slice(0, 10);
 function fieldErr(id, msg) { const inp = document.getElementById('f-' + id), e = document.getElementById('e-' + id); e.textContent = msg || ''; inp.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; }
-form.addEventListener('submit', e => {
+function showStatus(kind, msg) { statusEl.hidden = false; statusEl.className = 'status' + (kind === 'bad' ? ' bad' : ''); statusEl.textContent = msg; }
+let sending = false;
+form.addEventListener('submit', async e => {
   e.preventDefault();
+  if (sending) return;
   const fd = new FormData(form);
   const name = String(fd.get('name') || '').trim(), phone = String(fd.get('phone') || '').trim(), email = String(fd.get('email') || '').trim();
   const digits = phone.replace(/\D/g, '');
@@ -1046,17 +1054,25 @@ form.addEventListener('submit', e => {
     fieldErr('email', email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'Check the email address, e.g. you@example.com.' : '')
   ];
   if (ok.includes(false)) { const first = form.querySelector('[aria-invalid="true"]'); first && first.focus(); return; }
-  const visit = String(fd.get('visit') || ''), msg = String(fd.get('message') || '').trim();
-  const lines = ['Hi, I would like to enquire about SYNQ, IQ Suites by High Life.', '', 'Name: ' + name, 'Phone: ' + phone];
-  if (email) lines.push('Email: ' + email);
-  lines.push('Interested in: ' + (fd.get('unit') || ''));
-  if (visit) lines.push('Preferred visit date: ' + visit);
-  if (msg) lines.push('Message: ' + msg);
-  const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
-  const win = window.open(url, '_blank', 'noopener');
-  if (!win) location.href = url;
-  statusEl.hidden = false;
-  statusEl.textContent = 'WhatsApp is opening with your enquiry filled in. Press send there to reach the sales team.';
+  const data = new URLSearchParams({
+    name, phone, email,
+    unit: String(fd.get('unit') || ''),
+    visit: String(fd.get('visit') || ''),
+    message: String(fd.get('message') || '').trim().slice(0, 2000),
+    website: String(fd.get('website') || ''),
+    page: location.href.split('#')[0]
+  });
+  sending = true; submitBtn.disabled = true;
+  const label = submitBtn.innerHTML; submitBtn.innerHTML = '<span class="spin" aria-hidden="true"></span> Sending';
+  statusEl.hidden = true;
+  try {
+    if (!/^https:\/\/script\.google\.com\//.test(SHEET_URL)) throw new Error('not connected');
+    await fetch(SHEET_URL, { method: 'POST', mode: 'no-cors', body: data });
+    showStatus('ok', `Thank you, ${name.split(' ')[0]}. Your enquiry has reached the sales team and they will call you on ${phone}.`);
+    form.reset(); document.getElementById('f-u1').checked = true;
+  } catch (err) {
+    showStatus('bad', 'Your enquiry could not be sent. Check your internet connection and try again, or call +91 99994 34837.');
+  } finally { sending = false; submitBtn.disabled = false; submitBtn.innerHTML = label; }
 });
 })();
 </script>
