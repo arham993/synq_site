@@ -1036,7 +1036,7 @@ segBtns.forEach(b => b.addEventListener('click', () => { segBtns.forEach(x => x.
 drawPlan(1);
 
 /* Enquiry form: each enquiry is added as a new row in the SYNQ Google Sheet */
-const SHEET_URL = '__SHEET_URL__'; // Google Apps Script web app URL (see google-sheet/Code.gs)
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxAtuxT6EiPNS_64yZkmZoSpFW-F-maZk3T_8briEgukrBLZitkavltgQsglRvEIhrkFg/exec'; // Google Apps Script web app URL (see google-sheet/Code.gs)
 const form = document.getElementById('enq'), statusEl = document.getElementById('f-status'), submitBtn = document.getElementById('f-submit');
 document.getElementById('f-date').min = new Date().toISOString().slice(0, 10);
 function fieldErr(id, msg) { const inp = document.getElementById('f-' + id), e = document.getElementById('e-' + id); e.textContent = msg || ''; inp.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; }
