@@ -5,394 +5,499 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>SYNQ IQ Suites by High Life</title>
 <meta name="description" content="SYNQ, IQ Suites by High Life: fully furnished AI smart 1 and 2 BHK studio apartments, built by NBCC, facing a 100 metre green belt in Greater Noida West.">
-<meta name="theme-color" content="#FAF7FB">
+<meta name="theme-color" content="#FBFAF8">
 <meta property="og:title" content="SYNQ, IQ Suites by High Life">
 <meta property="og:description" content="Fully furnished AI smart homes, 1 and 2 BHK, Greater Noida West.">
 <meta property="og:image" content="img/tower.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap">
 <style>
-/* Palette follows the High Life brand: lavender paper, High Life purple, a little gold.
-   Radius rule: controls are full pills, cards 24px, inputs 14px. */
+/* Quiet-luxury palette: pearl silk, near-black ink, deep gold. All corners are square. */
 :root{
   color-scheme: light;
-  --paper:#FAF7FB;
-  --paper-2:#F3ECF5;
-  --glass:rgba(255,255,255,.58);
-  --glass-strong:rgba(255,255,255,.86);
-  --glass-edge:rgba(255,255,255,.75);
-  --line:rgba(122,46,135,.14);
-  --line-2:rgba(122,46,135,.26);
-  --ink:#1A1020;
-  --ink-soft:#3A2F48;
-  --muted:#6E6478;
-  --purple:#7A2E87;
-  --purple-deep:#4A1A5C;
-  --purple-soft:#A360AE;
-  --gold:#C9A962;
-  --danger:#B42318;
-  --serif:"Cormorant Garamond", "Iowan Old Style", Georgia, serif;
-  --sans:"Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --paper:#FBFAF8;
+  --silk:#F2EFEA;
+  --white:#FFFFFF;
+  --ink:#1C1C1C;
+  --ink-2:#3A3835;
+  --muted:#6A655E;
+  --line:#E4DFD6;
+  --line-2:#CFC7B9;
+  --gold:#99742C;
+  --gold-dark:#7E5F22;
+  --gold-soft:#F3ECDD;
+  --grey-btn:#DEDDDB;
+  --footer:#FAF9F7;
+  --danger:#A12A1C;
+  --display:"Fahkwang", "Didot", "Bodoni 72", Georgia, serif;
+  --sans:"Jost", "Futura", "Century Gothic", system-ui, sans-serif;
   --gutter:clamp(16px, 4vw, 56px);
+  --head:72px;
   --ease:cubic-bezier(.16,1,.3,1);
-  --shadow:0 10px 40px rgba(74,26,92,.08);
-  --shadow-hover:0 22px 56px rgba(122,46,135,.16);
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{background:var(--paper)}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
-h1,h2,h3{margin:0;font-weight:500;text-wrap:balance}
+body{margin:0;background:var(--paper);color:var(--ink);font:300 17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:400;text-wrap:balance}
 p{margin:0}
 a{color:inherit}
 button,input,textarea{font:inherit;color:inherit}
-:focus-visible{outline:2px solid var(--purple);outline-offset:3px;border-radius:8px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .num{font-variant-numeric:lining-nums tabular-nums}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Background */
-.sky{position:fixed;inset:0;z-index:0;background:
-  radial-gradient(70% 55% at 85% 20%, rgba(246,226,206,.75), rgba(246,226,206,0) 60%),
-  radial-gradient(70% 55% at 10% 0%, rgba(163,96,174,.16), rgba(163,96,174,0) 70%),
-  linear-gradient(180deg,#F1E8F4 0%,#FAF7FB 55%)}
-main,.nav,footer,.marquee{position:relative;z-index:3}
+/* Silk background (fixed, behind everything) */
+.silk{position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  linear-gradient(118deg, transparent 38%, rgba(255,255,255,.85) 47%, transparent 58%),
+  linear-gradient(152deg, transparent 55%, rgba(255,255,255,.7) 63%, transparent 72%),
+  radial-gradient(110% 70% at 105% -5%, #E7E2DA 0%, rgba(231,226,218,0) 60%),
+  radial-gradient(90% 70% at -10% 45%, #ECE8E2 0%, rgba(236,232,226,0) 62%),
+  radial-gradient(80% 60% at 55% 115%, #EAE5DD 0%, rgba(234,229,221,0) 60%),
+  var(--paper)}
+main,.nav,footer,.marquee,.float-cta{position:relative;z-index:2}
 
-/* Nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:10;padding-top:env(safe-area-inset-top,0px)}
-.nav-in{height:68px;display:flex;align-items:center;gap:32px;padding-inline:var(--gutter);
-  background:rgba(250,247,251,.72);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand b{font:600 21px/1 var(--sans);letter-spacing:.24em;color:var(--ink)}
-.brand span{font:italic 500 17px/1 var(--serif);color:var(--purple);padding-left:12px;border-left:1px solid var(--line-2)}
-.nav-links{display:flex;gap:26px;margin-left:auto}
-.nav-links a{text-decoration:none;font-size:14px;color:var(--ink-soft);transition:color .25s}
-.nav-links a:hover{color:var(--purple)}
-.btn{display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border-radius:999px;border:1px solid transparent;
-  font-weight:500;font-size:15px;text-decoration:none;cursor:pointer;white-space:nowrap;transition:transform .35s var(--ease),background .25s,border-color .25s,box-shadow .35s var(--ease),color .25s}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 28px;border:1px solid transparent;border-radius:0;
+  font:400 14px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
 .btn:active{transform:scale(.98)}
-.btn-primary{background:linear-gradient(135deg,#8C3A9A 0%,#5A1F65 100%);color:#fff;box-shadow:0 10px 28px rgba(122,46,135,.28), inset 0 1px 0 rgba(255,255,255,.25)}
-.btn-primary:hover{box-shadow:0 16px 38px rgba(122,46,135,.36), inset 0 1px 0 rgba(255,255,255,.25);transform:translateY(-1px)}
-.btn-ghost{background:var(--glass-strong);border-color:var(--line-2);color:var(--purple-deep)}
-.btn-ghost:hover{border-color:var(--purple)}
-.btn .arr{transition:transform .35s var(--ease)}
-.btn:hover .arr{transform:translateX(4px)}
-.nav .btn{height:40px;padding:0 18px;font-size:14px}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-gold:hover{background:var(--gold-dark)}
+.btn-grey{background:var(--grey-btn);color:var(--ink)}
+.btn-grey:hover{background:#D0CECA}
+.btn-line{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-line:hover{background:var(--ink);color:#fff}
 
-/* Shared */
+/* Header */
+.nav{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:rgba(251,250,248,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{height:var(--head);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:24px;padding-inline:var(--gutter)}
+.nav-links{display:flex;gap:26px}
+.nav-links a{text-decoration:none;font:400 12.5px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);transition:color .25s}
+.nav-links a:hover{color:var(--gold)}
+.brand{display:grid;justify-items:center;gap:3px;text-decoration:none;line-height:1}
+.brand b{font:500 24px/1 var(--display);letter-spacing:.34em;padding-left:.34em}
+.brand span{font:400 9.5px/1 var(--display);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.nav-right{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.nav-phone{font:400 14px/1 var(--display);letter-spacing:.06em;text-decoration:none;color:var(--ink);white-space:nowrap}
+.nav-phone small{display:block;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.nav .btn{height:40px;padding:0 18px;font-size:12px}
+
+/* Floating enquire */
+.float-cta{position:fixed;right:max(16px, env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:19;box-shadow:0 10px 30px rgba(60,40,10,.22)}
+
+/* Section titles, reference style: centred, uppercase, tracked */
 section{padding-inline:var(--gutter);position:relative}
-.wrap{max-width:1320px;margin:0 auto}
-.eyebrow{font:600 12px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--purple)}
-.h2{font-family:var(--serif);font-weight:500;font-size:clamp(44px,5.6vw,80px);line-height:1;letter-spacing:-.01em;color:var(--ink)}
-.h2 em{font-style:italic;color:var(--purple)}
-.lede{font-size:clamp(16px,1.3vw,18.5px);color:var(--muted);max-width:52ch;font-weight:400}
-.glass{background:var(--glass);border:1px solid var(--glass-edge);border-radius:24px;box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.85);
-  backdrop-filter:blur(22px) saturate(170%);-webkit-backdrop-filter:blur(22px) saturate(170%)}
-@media (prefers-reduced-transparency: reduce){.glass{background:#fff;backdrop-filter:none}}
+.wrap{max-width:1280px;margin:0 auto}
+.title{text-align:center;display:grid;gap:14px;justify-items:center;margin-bottom:clamp(28px,4vw,48px)}
+.title h2{font-size:clamp(24px,2.5vw,34px);letter-spacing:.14em;text-transform:uppercase;line-height:1.25}
+.title .sub{font:400 15px/1.4 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.title p{max-width:70ch;color:var(--ink-2)}
+.rule{display:flex;align-items:center;gap:12px;color:var(--gold)}
+.rule::before,.rule::after{content:"";width:64px;height:1px;background:currentColor;opacity:.6}
+.rule i{width:7px;height:7px;border:1px solid currentColor;transform:rotate(45deg)}
+.caption{font:400 10px/1 var(--display);letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.85)}
 
-/* Hero */
-.hero{min-height:100dvh;display:flex;align-items:center;padding-block:110px 64px}
-.hero-grid{width:100%;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(32px,5vw,72px);align-items:center}
-.hero-copy{display:grid;gap:24px}
-.hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(56px,6.8vw,108px);line-height:.95;letter-spacing:-.02em}
-.hero h1 em{font-style:italic;color:var(--purple);display:inline-block;padding-bottom:.06em}
-.hero .lede{max-width:44ch;color:var(--ink-soft)}
-.cta-row{display:flex;flex-wrap:wrap;gap:12px}
-.hero-media{position:relative;margin:0}
-.hero-media .ph{border-radius:28px;overflow:hidden;aspect-ratio:4/5;box-shadow:0 30px 80px rgba(74,26,92,.22)}
-.hero-media img{display:block;width:100%;height:112%;object-fit:cover;object-position:57% 40%;will-change:transform}
-.hero-price{position:absolute;left:-32px;bottom:32px;padding:18px 22px;display:grid;gap:2px}
-.hero-price small{color:var(--muted);font-size:12.5px;letter-spacing:.04em}
-.hero-price .big{font:600 clamp(36px,3.6vw,52px)/1 var(--serif);color:var(--purple-deep)}
-.hero-tag{position:absolute;top:22px;right:22px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.82);backdrop-filter:blur(10px);font-size:13px;font-weight:500;color:var(--purple-deep)}
+/* Hero: image slider + info panel */
+.hero{padding:calc(var(--head) + env(safe-area-inset-top,0px)) 0 0}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(320px,1fr);min-height:calc(100dvh - var(--head))}
+.slider{position:relative;overflow:hidden;background:#D9D3CA}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.slide.on{opacity:1}
+.slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 7s linear}
+.slide.on img{transform:scale(1)}
+.slide .caption{position:absolute;right:20px;bottom:18px}
+.arrow{position:absolute;top:50%;translate:0 -50%;width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.72);cursor:pointer;display:grid;place-items:center;z-index:2;transition:background .25s}
+.arrow:hover{background:#fff}
+.arrow svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.6}
+.arrow.prev{left:20px}.arrow.next{right:20px}
+.dots{position:absolute;left:24px;bottom:22px;display:flex;gap:8px;z-index:2}
+.dots button{width:26px;height:2px;border:0;padding:0;background:rgba(255,255,255,.5);cursor:pointer}
+.dots button[aria-current="true"]{background:#fff}
+.panel{background:var(--white);display:grid;align-content:center;justify-items:center;text-align:center;gap:18px;padding:40px clamp(20px,3vw,44px)}
+.panel .mark{display:grid;justify-items:center;gap:6px}
+.panel .mark b{font:500 clamp(40px,4vw,56px)/1 var(--display);letter-spacing:.3em;padding-left:.3em}
+.panel .mark span{font:400 12px/1.2 var(--display);letter-spacing:.3em;text-transform:uppercase}
+.panel .by{font:400 13px/1 var(--display);letter-spacing:.12em;color:var(--muted)}
+.panel .by b{display:block;margin-top:6px;font-weight:500;font-size:17px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.panel .loc{font:400 12px/1.5 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
+.panel h1{font:400 clamp(22px,2vw,28px)/1.35 var(--display);letter-spacing:.14em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px var(--gold)}
+@supports not (-webkit-text-stroke:1px black){.panel h1{color:var(--gold)}}
+.panel .lede{font-size:15.5px;color:var(--ink-2);max-width:34ch}
+.panel .cta{display:grid;gap:10px;width:min(100%,300px)}
+.panel .foot{font:400 10px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.panel .foot::before,.panel .foot::after{content:"";width:28px;height:1px;background:var(--line-2)}
 
-/* Trust strip */
-.trust{padding-block:0 12vh}
-.trust-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border-radius:24px;overflow:hidden;border:1px solid var(--glass-edge);box-shadow:var(--shadow)}
-.trust-grid > div{background:rgba(255,255,255,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);padding:24px 24px 26px;display:grid;gap:6px;align-content:start}
-.trust-grid b{font:600 clamp(30px,3vw,42px)/1 var(--serif);color:var(--purple-deep)}
-.trust-grid span{font-size:14px;color:var(--muted);line-height:1.45}
+/* Collaboration intro */
+.intro{padding-block:clamp(72px,10vw,120px) clamp(48px,7vw,80px)}
+.lockup{display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,26px);flex-wrap:wrap;margin-bottom:10px}
+.lockup b{font:600 clamp(22px,2.6vw,36px)/1 var(--display);letter-spacing:.2em}
+.lockup i{font-style:normal;color:var(--gold);font-size:22px}
+.feats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2);margin-top:clamp(36px,5vw,56px)}
+.feats > div{padding:26px 20px;text-align:center;display:grid;gap:8px;align-content:start}
+.feats > div + div{border-left:1px solid var(--line)}
+.feats b{font:400 clamp(20px,1.8vw,26px)/1.25 var(--display);letter-spacing:.06em}
+.feats span{font-size:14.5px;color:var(--muted);line-height:1.5}
 
-/* Build (pinned): the render is revealed from the ground up */
-.build{height:260vh;padding:0}
-.build-pin{height:100vh;height:100dvh;display:flex;align-items:center;padding-inline:var(--gutter);padding-top:68px}
-.build-grid{width:100%;max-width:1320px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
+/* Build (pinned): render revealed from the ground up */
+.build{height:250vh;padding:0}
+.build-pin{height:100vh;height:100dvh;display:flex;align-items:center;padding:calc(var(--head) + 16px) var(--gutter) 16px}
+.build-grid{width:100%;max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(28px,5vw,72px);align-items:center}
 .build-copy{display:grid;gap:22px}
-.level{display:flex;align-items:flex-end;gap:20px}
-.level #lvl{font:500 clamp(120px,15vw,230px)/.78 var(--serif);letter-spacing:-.03em;color:var(--purple-deep)}
-.level small{display:grid;gap:4px;padding-bottom:12px;font-size:13px;color:var(--muted)}
-.level small b{font:600 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--purple)}
-.build h2{font:500 clamp(32px,3.4vw,50px)/1.05 var(--serif);max-width:16ch}
-.progress{height:2px;background:var(--line);max-width:420px;position:relative;overflow:hidden;border-radius:2px}
-.progress i{position:absolute;inset:0;background:linear-gradient(90deg,var(--purple),var(--gold));transform-origin:left;transform:scaleX(.2)}
+.level{display:flex;align-items:flex-end;gap:18px}
+.level #lvl{font:300 clamp(110px,14vw,210px)/.8 var(--display);letter-spacing:-.02em;color:var(--ink)}
+.level small{display:grid;gap:6px;padding-bottom:14px;font:400 12px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.level small b{font-weight:500;color:var(--gold)}
+.build h2{font-size:clamp(22px,2.3vw,32px);letter-spacing:.12em;text-transform:uppercase;line-height:1.3;max-width:20ch}
+.progress{height:1px;background:var(--line-2);max-width:420px;position:relative;overflow:hidden}
+.progress i{position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(.2)}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 .fact{border-top:1px solid var(--line-2);padding-top:14px;opacity:.35;transition:opacity .6s var(--ease),border-color .6s}
-.fact.on{opacity:1;border-color:var(--purple)}
-.fact b{display:block;font-weight:600;font-size:15px}
-.fact span{color:var(--muted);font-size:13.5px;line-height:1.45}
-.build-media{position:relative;aspect-ratio:4/5;max-height:calc(100dvh - 140px);width:100%;justify-self:end;border-radius:28px;overflow:hidden;box-shadow:0 30px 80px rgba(74,26,92,.18);background:#E9DFEE}
+.fact.on{opacity:1;border-color:var(--gold)}
+.fact b{display:block;font:500 13px/1.35 var(--display);letter-spacing:.1em;text-transform:uppercase}
+.fact span{display:block;margin-top:6px;color:var(--muted);font-size:14px;line-height:1.45}
+.build-media{position:relative;aspect-ratio:4/5;max-height:calc(100dvh - var(--head) - 60px);width:100%;justify-self:end;overflow:hidden;background:#E3DDD4}
 .build-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:57% 40%}
-.build-media .ghost{filter:grayscale(1) contrast(.8) brightness(1.25);opacity:.45;mix-blend-mode:multiply}
+.build-media .ghost{filter:grayscale(1) contrast(.75) brightness(1.3);opacity:.5;mix-blend-mode:multiply}
 .build-media .real{clip-path:inset(80% 0 0 0);will-change:clip-path}
-.build-media .edge{position:absolute;left:0;right:0;top:80%;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent);box-shadow:0 0 18px rgba(201,169,98,.9);will-change:top}
-.build-media .edge span{position:absolute;right:16px;top:-30px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.88);font-size:12px;font-weight:600;color:var(--purple-deep);white-space:nowrap}
+.build-media .edge{position:absolute;left:0;right:0;top:80%;height:1px;background:var(--gold);box-shadow:0 0 14px rgba(153,116,44,.9);will-change:top}
+.build-media .edge span{position:absolute;right:14px;top:-30px;padding:6px 10px;background:#fff;font:400 11px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.build-media .caption{position:absolute;right:14px;bottom:12px}
+
+/* Location + connectivity timeline */
+.location{padding-block:clamp(72px,10vw,120px)}
+.timeline{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;padding-bottom:36px;margin-bottom:clamp(40px,5vw,64px)}
+.timeline::after{content:"";position:absolute;left:0;right:0;bottom:12px;height:1px;background:linear-gradient(90deg,transparent,var(--ink-2) 8%,var(--ink-2) 92%,transparent);opacity:.55}
+.timeline div{text-align:center;display:grid;gap:4px;align-content:end;position:relative}
+.timeline div::after{content:"";position:absolute;left:50%;bottom:-36px;translate:-50% 0;width:26px;height:26px;border-radius:50%;background:#8B6239;box-shadow:0 0 0 6px rgba(139,98,57,.12);z-index:1}
+.timeline b{font:400 12.5px/1.45 var(--display);letter-spacing:.12em;text-transform:uppercase}
+.timeline span{font-size:14px;color:var(--muted)}
+.loc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line-2)}
+.loc{padding:26px 22px 28px;display:grid;gap:14px;align-content:start;border-bottom:1px solid var(--line-2)}
+.loc:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
+.loc h3{font:500 13px/1.2 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.loc ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.loc li{display:flex;align-items:baseline;gap:10px;font-size:15.5px}
+.loc li span:first-child{flex:1;min-width:0}
+.loc li .t{font:400 20px/1 var(--display);white-space:nowrap}
+.loc li .t small{font:400 10.5px var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-left:4px}
+
+/* Gallery with Exterior / Interior tabs */
+.gallery{padding-block:clamp(56px,8vw,96px)}
+.tabs{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.tabs .btn{min-width:200px}
+.tabs .btn[aria-selected="false"]{background:var(--grey-btn);color:var(--ink)}
+.stage{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3.2fr) minmax(0,1fr);gap:14px;align-items:center}
+.stage figure{margin:0;position:relative;overflow:hidden;background:#E3DDD4}
+.stage .side{aspect-ratio:3/4;opacity:.75;cursor:pointer;transition:opacity .3s}
+.stage .side:hover{opacity:1}
+.stage .main{aspect-ratio:16/9}
+.stage img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .5s ease, transform .9s var(--ease)}
+.stage .main .caption{position:absolute;left:50%;bottom:16px;translate:-50% 0}
+.stage .arrow.prev{left:calc(20% + 6px)}.stage .arrow.next{right:calc(20% + 6px)}
+.stage .count{position:absolute;right:calc(20% + 20px);top:16px;font:400 11px/1 var(--display);letter-spacing:.2em;color:#fff;z-index:2;text-shadow:0 1px 6px rgba(0,0,0,.4)}
 
 /* Smart living */
-.smart{padding-block:16vh}
-.smart-grid{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:40px;align-items:start}
+.smart{padding-block:clamp(72px,10vw,120px)}
+.smart-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start}
 .smart-copy{display:grid;gap:22px}
+.smart-copy .title{justify-items:start;text-align:left;margin:0}
 .modes{display:flex;flex-wrap:wrap;gap:8px}
-.mode{height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--line-2);background:var(--glass-strong);cursor:pointer;font-size:15px;color:var(--ink-soft);transition:background .3s,color .3s,border-color .3s,transform .3s var(--ease)}
-.mode:hover{border-color:var(--purple)}
-.mode:active{transform:scale(.97)}
-.mode[aria-selected="true"]{background:var(--purple);color:#fff;border-color:var(--purple)}
-.mode-card{padding:26px;display:grid;gap:10px;min-height:176px}
-.mode-card .room{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.mode-card h3{font:500 40px/1 var(--serif)}
-.mode-card p{color:var(--ink-soft);max-width:44ch}
-.swatch{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:4px}
+.mode{height:44px;padding:0 20px;border:1px solid var(--line-2);background:var(--white);cursor:pointer;font:400 12.5px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);transition:background .3s,color .3s,border-color .3s}
+.mode:hover{border-color:var(--ink)}
+.mode[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.mode-card{padding:24px 26px;display:grid;gap:10px;background:var(--white);border:1px solid var(--line)}
+.mode-card .room{font:400 11px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.mode-card h3{font-size:28px;letter-spacing:.14em;text-transform:uppercase}
+.mode-card p{color:var(--ink-2);max-width:46ch}
+.swatch{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
 .swatch span{display:flex;align-items:center;gap:8px}
-.swatch i{width:24px;height:9px;border-radius:999px;background:var(--c,#fff);box-shadow:0 0 0 1px rgba(26,16,32,.12),0 0 14px var(--c,#fff)}
-.control{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.control div{padding:16px}
-.control b{display:block;font-weight:600}
-.control span{font-size:13px;color:var(--muted);line-height:1.4;display:block}
-.smart-photo{position:sticky;top:110px;justify-self:end;width:min(100%,480px);margin:0;border-radius:28px;overflow:hidden;box-shadow:var(--shadow-hover);isolation:isolate}
-.smart-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:60% 50%;filter:brightness(var(--bright,1.05)) saturate(var(--sat,1));transition:filter .9s var(--ease)}
+.swatch i{width:26px;height:8px;background:var(--c,#fff);box-shadow:0 0 0 1px rgba(28,28,28,.15),0 0 12px var(--c,#fff)}
+.control{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line-2)}
+.control div{padding:16px 12px 0 0}
+.control b{display:block;font:500 12.5px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase}
+.control span{font-size:13.5px;color:var(--muted);line-height:1.4;display:block;margin-top:4px}
+.smart-photo{position:sticky;top:calc(var(--head) + 32px);margin:0;overflow:hidden;isolation:isolate}
+.smart-photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:60% 50%;filter:brightness(var(--bright,1.05)) saturate(var(--sat,1));transition:filter .9s var(--ease)}
 .smart-photo .tint{position:absolute;inset:0;background:var(--tint,#fff7e8);mix-blend-mode:var(--blend,soft-light);opacity:var(--op,.35);transition:background .9s var(--ease),opacity .9s var(--ease)}
-.smart-photo figcaption{position:absolute;left:16px;bottom:16px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);font-size:13px;font-weight:500;color:var(--purple-deep)}
+.smart-photo figcaption{position:absolute;left:0;bottom:0;padding:12px 16px;background:#fff;font:400 11px/1 var(--display);letter-spacing:.2em;text-transform:uppercase}
 
 /* System */
-.system{padding-block:12vh}
-.system-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr 1fr;gap:14px}
-.sys-photo{grid-row:span 2;border-radius:24px;overflow:hidden;position:relative;min-height:320px;box-shadow:var(--shadow)}
-.sys-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sys-head{grid-column:span 3;padding:8px 4px 18px;display:grid;gap:14px;align-content:end}
-.cluster{padding:24px;display:grid;gap:18px;align-content:start;transition:box-shadow .4s var(--ease),transform .4s var(--ease)}
-.cluster:hover{box-shadow:var(--shadow-hover), inset 0 1px 0 rgba(255,255,255,.85);transform:translateY(-3px)}
-.cluster h3{font:italic 500 30px/1 var(--serif);color:var(--purple)}
+.system{padding-block:0 clamp(72px,10vw,120px)}
+.system-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.cluster{padding:28px 24px;display:grid;gap:18px;align-content:start}
+.cluster + .cluster{border-left:1px solid var(--line)}
+.cluster h3{font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
 .cluster dl{margin:0;display:grid;gap:16px}
-.cluster dt{font-weight:600}
-.cluster dd{margin:2px 0 0;color:var(--muted);font-size:14px;line-height:1.45}
+.cluster dt{font:500 13.5px/1.3 var(--display);letter-spacing:.08em;text-transform:uppercase}
+.cluster dd{margin:4px 0 0;color:var(--muted);font-size:15px;line-height:1.5}
 
 /* Units */
-.units{padding-block:14vh}
-.units-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;margin-top:40px}
-.plan-box{padding:22px;display:grid;gap:16px}
+.units{padding-block:clamp(72px,10vw,120px);background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.7) 20%,rgba(255,255,255,.7) 80%,rgba(255,255,255,0))}
+.units-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:0;border:1px solid var(--line-2);background:var(--white)}
+.plan-box{padding:24px;display:grid;gap:16px;border-right:1px solid var(--line)}
 .plan-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.seg{display:inline-flex;padding:4px;border-radius:999px;border:1px solid var(--line-2);background:var(--glass-strong)}
-.seg button{height:38px;padding:0 18px;border-radius:999px;border:0;background:transparent;cursor:pointer;font-size:14px;color:var(--ink-soft);transition:background .3s,color .3s}
-.seg button[aria-selected="true"]{background:var(--purple);color:#fff}
-.plan-note{font-size:12.5px;color:var(--muted)}
+.seg{display:inline-flex;gap:8px}
+.seg button{height:40px;padding:0 20px;border:0;background:var(--grey-btn);cursor:pointer;font:400 12.5px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;transition:background .3s,color .3s}
+.seg button[aria-selected="true"]{background:var(--gold);color:#fff}
+.plan-note{font:400 10.5px/1 var(--display);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
 .plan-svg{width:100%;height:auto;display:block;max-height:520px}
-.plan-svg .room{fill:rgba(255,255,255,.55);stroke:var(--purple-deep);stroke-width:1.4;vector-effect:non-scaling-stroke;transition:fill .3s}
-.plan-svg .room.wet{fill:rgba(163,96,174,.08)}
-.plan-svg .room.bal{fill:rgba(201,169,98,.1);stroke:var(--gold);stroke-dasharray:5 4}
-.plan-svg g.r:hover .room,.plan-svg g.r.hl .room{fill:rgba(122,46,135,.14)}
-.plan-svg text{fill:var(--ink);font-family:var(--sans);font-weight:500}
-.plan-svg text.d{fill:var(--muted);font-weight:400}
-.areas{padding:26px;display:grid;gap:20px;align-content:start}
-.area{display:grid;gap:2px}
-.area .k{font-size:13px;color:var(--muted)}
-.area .v{font:500 clamp(50px,5vw,72px)/.95 var(--serif)}
-.area .v small{font:400 14px var(--sans);color:var(--muted);margin-left:8px}
-.area .m{font-size:12.5px;color:var(--muted)}
-.area.main .v{color:var(--purple)}
+.plan-svg .room{fill:#fff;stroke:var(--ink);stroke-width:1.3;vector-effect:non-scaling-stroke;transition:fill .3s}
+.plan-svg .room.wet{fill:#F4F2EE}
+.plan-svg .room.bal{fill:var(--gold-soft);stroke:var(--gold);stroke-dasharray:5 4}
+.plan-svg g.r:hover .room,.plan-svg g.r.hl .room{fill:#EFE5CF}
+.plan-svg text{fill:var(--ink);font-family:var(--display);letter-spacing:.06em}
+.plan-svg text.d{fill:var(--muted);font-family:var(--sans)}
+.areas{padding:28px;display:grid;gap:22px;align-content:start}
+.area{display:grid;gap:4px}
+.area .k{font:400 11px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.area .v{font:300 clamp(46px,4.6vw,64px)/1 var(--display)}
+.area .v small{font:400 13px var(--display);letter-spacing:.1em;color:var(--muted);margin-left:8px}
+.area .m{font-size:13.5px;color:var(--muted)}
+.area.main .v{color:var(--gold)}
 .rooms{display:grid;gap:8px;padding-top:18px;border-top:1px solid var(--line)}
-.rooms div{display:flex;justify-content:space-between;gap:12px;font-size:14px;cursor:default}
-.rooms div span:last-child{font-size:12.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
-
-/* Location */
-.location{padding-block:14vh}
-.loc-band{position:relative;border-radius:24px;overflow:hidden;min-height:320px;display:flex;align-items:flex-end;padding:clamp(22px,4vw,48px);box-shadow:var(--shadow-hover)}
-.loc-band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.loc-band::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,16,32,.82),rgba(74,26,92,.25) 70%)}
-.loc-band > div{position:relative;z-index:1;display:grid;gap:16px;color:#fff}
-.loc-band .h2{color:#fff}
-.loc-band .h2 em{color:#E7C9EE}
-.routes{display:flex;flex-wrap:wrap;gap:8px}
-.routes span{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);backdrop-filter:blur(10px);font-size:13.5px}
-.loc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
-.loc{padding:22px;display:grid;gap:12px;align-content:start}
-.loc h3{font:600 12px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
-.loc ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
-.loc li{display:flex;align-items:baseline;gap:10px;font-size:15px}
-.loc li span:first-child{flex:1;min-width:0}
-.loc li .t{font:600 24px/1 var(--serif);white-space:nowrap;color:var(--purple-deep)}
-.loc li .t small{font:400 11.5px var(--sans);color:var(--muted);margin-left:3px}
+.rooms div{display:flex;justify-content:space-between;gap:12px;font-size:15px}
+.rooms div span:last-child{font-size:13.5px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
 
 /* Green + amenities */
-.green{padding-block:10vh 6vh}
-.green-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:44px;align-items:center}
-.green-img{border-radius:24px;overflow:hidden;box-shadow:var(--shadow-hover)}
+.green{padding-block:clamp(72px,10vw,120px) 0}
+.green-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(32px,5vw,64px);align-items:center}
+.green-img{position:relative;overflow:hidden;margin:0}
 .green-img img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}
+.green-img .caption{position:absolute;right:16px;bottom:14px}
 .green-copy{display:grid;gap:18px}
-.green-copy .big{font:500 clamp(96px,11vw,160px)/.8 var(--serif);color:var(--purple)}
-.green-copy .big small{font:italic 500 clamp(26px,2.6vw,36px) var(--serif);color:var(--ink);margin-left:8px}
+.green-copy .big{font:300 clamp(80px,9vw,132px)/.85 var(--display);color:var(--gold)}
+.green-copy .big small{display:block;margin-top:14px;font:400 15px/1 var(--display);letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.green-copy h2{font-size:clamp(22px,2.2vw,30px);letter-spacing:.12em;text-transform:uppercase;line-height:1.3}
+.green-copy p{color:var(--ink-2)}
 .wellness{display:flex;flex-wrap:wrap;gap:8px}
-.wellness span{padding:8px 14px;border-radius:999px;background:var(--glass-strong);border:1px solid var(--line);font-size:13.5px;color:var(--ink-soft)}
-.marquee{overflow:hidden;border-block:1px solid var(--line);margin-top:10vh;padding-block:24px;background:rgba(255,255,255,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+.wellness span{padding:9px 14px;border:1px solid var(--line-2);background:#fff;font:400 11.5px/1 var(--display);letter-spacing:.14em;text-transform:uppercase}
+.marquee{overflow:hidden;border-block:1px solid var(--line-2);margin-top:clamp(56px,8vw,96px);padding-block:22px;background:rgba(255,255,255,.75);
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.track{display:flex;width:max-content;gap:40px;animation:slide 64s linear infinite}
-.track span{font:italic 500 clamp(30px,3.4vw,46px)/1 var(--serif);white-space:nowrap;display:flex;align-items:center;gap:40px;color:var(--ink)}
-.track span::after{content:"";width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--gold)}
-.track span:nth-child(3n)::after{border-bottom-color:var(--purple-soft)}
+.track{display:flex;width:max-content;gap:36px;animation:slide 70s linear infinite}
+.track span{font:400 clamp(18px,1.8vw,24px)/1 var(--display);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:36px}
+.track span::after{content:"";width:7px;height:7px;border:1px solid var(--gold);transform:rotate(45deg)}
 .marquee:hover .track{animation-play-state:paused}
 @keyframes slide{to{transform:translateX(-50%)}}
 
-/* Price */
-.price{padding-block:14vh}
-.price-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:36px}
-.p-main{grid-column:span 4;padding:clamp(24px,3vw,40px);display:grid;gap:14px;align-content:space-between;min-height:330px;
-  background:radial-gradient(110% 90% at 100% 0%, rgba(163,96,174,.22), transparent 60%), var(--glass)}
-.p-old{font-size:16px;color:var(--muted);text-decoration:line-through;text-decoration-color:var(--danger);text-decoration-thickness:1.5px}
-.p-new{font:500 clamp(84px,10.5vw,160px)/.85 var(--serif);letter-spacing:-.02em;color:var(--purple-deep)}
-.p-new small{font:400 16px var(--sans);color:var(--muted);letter-spacing:0;margin-left:10px;vertical-align:.5em}
-.p-plan{grid-column:span 2;padding:28px;display:grid;gap:12px;align-content:start}
-.p-plan .ratio{font:500 clamp(58px,6vw,86px)/.9 var(--serif);color:var(--ink)}
-.p-plan .ratio i{font-style:normal;color:var(--gold)}
-.p-plan p,.hint{color:var(--muted);font-size:14.5px}
-.p-yield{grid-column:span 6;padding:24px 28px;display:flex;flex-wrap:wrap;gap:14px 40px;align-items:center;justify-content:space-between;
-  background:linear-gradient(135deg,#8C3A9A 0%,#4A1A5C 100%);border-color:transparent;color:#fff;box-shadow:0 18px 50px rgba(74,26,92,.28)}
-.p-yield b{font:500 clamp(30px,3.2vw,46px)/1.05 var(--serif)}
-.p-yield b em{font-style:italic;color:#F0E4C8}
-.p-yield span{color:rgba(255,255,255,.8);font-size:14px;max-width:44ch}
-.free{grid-column:span 6;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.free div{padding:22px;display:grid;gap:6px;align-content:end;min-height:150px}
-.free div:first-child{background:linear-gradient(160deg,rgba(201,169,98,.22),rgba(255,255,255,.5) 70%)}
-.free b{font:500 30px/1 var(--serif)}
-.free span{font:600 11.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--purple)}
-.free small{color:var(--muted);font-size:13px}
+/* Rate sheet */
+.rates-sec{padding-block:clamp(72px,10vw,120px)}
+.sheet{background:var(--white);border:1px solid var(--line-2);display:grid;grid-template-columns:220px minmax(0,1fr)}
+.sheet-side{background:var(--silk);border-right:1px solid var(--line-2);display:grid;align-content:center;justify-items:center;gap:14px;padding:28px 18px;text-align:center}
+.sheet-side .ico{width:64px;height:64px;border:1px solid var(--gold);display:grid;place-items:center}
+.sheet-side .ico svg{width:34px;height:34px;stroke:var(--gold);fill:none;stroke-width:1.2}
+.sheet-side b{font:500 22px/1.2 var(--display);letter-spacing:.2em;text-transform:uppercase}
+.sheet-side span{font:400 10.5px/1.4 var(--display);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+table.rates{width:100%;border-collapse:collapse;font-variant-numeric:lining-nums tabular-nums}
+.rates caption{caption-side:top;text-align:center;padding:16px;background:var(--ink);color:#fff;font:500 16px/1 var(--display);letter-spacing:.24em;text-transform:uppercase}
+.rates thead th{background:#2A2825;color:#fff;font:400 12px/1.35 var(--display);letter-spacing:.14em;text-transform:uppercase;padding:16px 14px;text-align:center;border-left:1px solid rgba(255,255,255,.14)}
+.rates thead th:first-child{border-left:0;text-align:left;padding-left:24px}
+.rates tbody td{padding:16px 14px;text-align:center;border-top:1px solid var(--line);font-size:16.5px}
+.rates tbody td + td{border-left:1px solid var(--line)}
+.rates tbody td:first-child{text-align:left;padding-left:24px;font:400 14.5px/1.35 var(--display);letter-spacing:.04em}
+.rates tbody td.rate{font:500 18px/1 var(--display);color:var(--ink)}
+.rates tbody td.na{color:var(--muted);font-size:14px;letter-spacing:.1em}
+.rates tbody tr:nth-child(even) td{background:#FAF8F4}
+.rates tbody tr:hover td{background:var(--gold-soft)}
+.rates-note{margin-top:14px;font-size:13.5px;color:var(--muted);text-align:center}
+.incl{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:clamp(40px,5vw,56px);border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+.incl div{padding:22px 16px;text-align:center;display:grid;gap:6px;align-content:start}
+.incl div + div{border-left:1px solid var(--line)}
+.incl span{font:400 10.5px/1 var(--display);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.incl b{font:400 17px/1.3 var(--display);letter-spacing:.08em;text-transform:uppercase}
+.incl small{font-size:13px;color:var(--muted)}
+.incl-head{text-align:center;margin-top:clamp(40px,5vw,56px);font:400 12px/1 var(--display);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.incl-head + .incl{margin-top:16px}
 
 /* Enquiry */
-.enquire{padding-block:14vh 10vh}
-.enq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,640px);gap:40px;align-items:start}
-.enq-copy{display:grid;gap:22px;position:sticky;top:120px}
-form.glass{padding:clamp(22px,3vw,36px);display:grid;gap:18px;background:var(--glass-strong)}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.enquire{padding-block:clamp(72px,10vw,120px)}
+.enq-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);border:1px solid var(--line-2);background:var(--white)}
+.enq-side{position:relative;min-height:420px;overflow:hidden}
+.enq-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.enq-side::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,18,15,.78),rgba(20,18,15,.1) 60%)}
+.enq-side .over{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:28px;color:#fff;display:grid;gap:10px}
+.enq-side .over small{font:400 11px/1 var(--display);letter-spacing:.24em;text-transform:uppercase;opacity:.85}
+.enq-side .over a{font:400 clamp(26px,2.6vw,34px)/1 var(--display);letter-spacing:.06em;text-decoration:none}
+.enq-side .over p{font-size:15px;opacity:.9;max-width:40ch}
+form.enq{padding:clamp(24px,3.4vw,44px);display:grid;gap:18px}
+form.enq h2{font-size:clamp(22px,2.2vw,30px);letter-spacing:.16em;text-transform:uppercase}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .field{display:grid;gap:8px}
-.field label,.field legend{font-size:14px;font-weight:600;padding:0;color:var(--ink)}
-.field label i,.field legend i{font-style:normal;color:var(--purple)}
-.field input,.field textarea{width:100%;min-height:50px;padding:12px 15px;border-radius:14px;border:1px solid #D9CCDF;background:#fff;color:var(--ink);transition:border-color .2s,box-shadow .2s}
-.field textarea{min-height:110px;resize:vertical}
-.field input::placeholder,.field textarea::placeholder{color:#8A7F94}
-.field input:focus,.field textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px rgba(122,46,135,.14)}
-.field input[aria-invalid="true"]{border-color:var(--danger)}
-.help{font-size:12.5px;color:var(--muted)}
-.err{font-size:13px;color:var(--danger)}
+.field label,.field legend{font:400 11.5px/1 var(--display);letter-spacing:.2em;text-transform:uppercase;padding:0;color:var(--ink)}
+.field label i,.field legend i{font-style:normal;color:var(--gold)}
+.field input,.field textarea{width:100%;min-height:50px;padding:12px 2px;border:0;border-bottom:1px solid var(--line-2);border-radius:0;background:transparent;color:var(--ink);font-size:16.5px;transition:border-color .2s}
+.field textarea{min-height:90px;resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:#8F887E}
+.field input:focus,.field textarea:focus{outline:none;border-bottom:2px solid var(--gold)}
+.field input[aria-invalid="true"]{border-bottom-color:var(--danger)}
+.help{font-size:13px;color:var(--muted)}
+.err{font-size:13.5px;color:var(--danger)}
 .err:empty{display:none}
 fieldset{border:0;margin:0;padding:0}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips label{position:relative}
 .chips input{position:absolute;opacity:0;pointer-events:none}
-.chips span{display:inline-flex;align-items:center;height:42px;padding:0 18px;border-radius:999px;border:1px solid #D9CCDF;background:#fff;cursor:pointer;font-size:14px;font-weight:500;transition:all .25s}
-.chips input:checked + span{background:var(--purple);color:#fff;border-color:var(--purple)}
-.chips input:focus-visible + span{outline:2px solid var(--purple);outline-offset:3px}
+.chips span{display:inline-flex;align-items:center;height:42px;padding:0 18px;border:1px solid var(--line-2);cursor:pointer;font:400 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;transition:all .25s}
+.chips input:checked + span{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chips input:focus-visible + span{outline:2px solid var(--gold);outline-offset:3px}
 .form-foot{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
-.form-foot .help{max-width:34ch}
-.status{padding:14px 16px;border-radius:14px;font-size:14.5px;border:1px solid var(--line-2);background:rgba(122,46,135,.06)}
+.form-foot .help{max-width:32ch}
+.status{padding:14px 16px;font-size:15px;border:1px solid var(--gold);background:var(--gold-soft)}
 
 /* Footer */
-footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:rgba(255,255,255,.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.foot{max-width:1320px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:20px 48px;align-items:center}
-.foot img{width:170px;height:auto}
-.foot p{color:var(--ink-soft);font-size:13.5px;max-width:74ch}
-.foot .legal{grid-column:1/-1;color:var(--muted);font-size:12px}
+footer{padding:48px var(--gutter) calc(88px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line-2);background:var(--footer)}
+.foot{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:20px 48px;align-items:center}
+.foot img{width:160px;height:auto}
+.foot p{color:var(--ink-2);font-size:14px;max-width:70ch}
+.foot .call{text-align:right;text-decoration:none;font:400 20px/1.2 var(--display);letter-spacing:.06em}
+.foot .call small{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.foot .legal{grid-column:1/-1;color:var(--muted);font-size:12.5px;border-top:1px solid var(--line);padding-top:18px}
 
 /* Responsive */
 @media (max-width: 1080px){
-  .system-grid{grid-template-columns:1fr 1fr}
-  .sys-head{grid-column:1/-1}
-  .sys-photo{grid-row:auto;grid-column:1/-1;min-height:240px}
-  .loc-grid{grid-template-columns:1fr 1fr}
-  .free{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .trust-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav-links{display:none}
+  .nav-in{grid-template-columns:auto 1fr}
+  .brand{justify-items:start}
+  .brand b{padding-left:0}
+  .timeline{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:64px}
+  .loc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .loc:not(:nth-child(3n+1)){border-left:0}
+  .loc:nth-child(even){border-left:1px solid var(--line)}
+  .incl{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .incl div:nth-child(4){border-left:0}
 }
 @media (max-width: 900px){
-  .hero-grid,.build-grid{grid-template-columns:minmax(0,1fr)}
-  .hero-media .ph{aspect-ratio:4/3}
-  .hero-price{left:16px;bottom:16px}
+  :root{--head:64px}
+  .nav-phone small{display:none}
+  .hero-grid,.build-grid,.smart-grid,.units-grid,.green-grid,.enq-grid{grid-template-columns:minmax(0,1fr)}
+  .hero-grid{min-height:0}
+  .slider{height:58vh;min-height:320px}
+  .panel{padding:32px 20px 40px}
+  .feats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feats > div:nth-child(3){border-left:0}
+  .feats > div:nth-child(n+3){border-top:1px solid var(--line)}
   .build-media{aspect-ratio:auto;height:32vh;max-height:none;justify-self:stretch;order:-1}
   .build-copy{gap:14px}
-  .facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   .fact span{display:none}
-  .fact b{font-size:13px}
-  .nav-links{display:none}
-  .nav .btn{margin-left:auto}
-  .hero{padding-block:100px 40px}
-  .smart-grid,.units-grid,.green-grid,.enq-grid{grid-template-columns:minmax(0,1fr)}
-  .smart-photo{position:relative;top:auto;justify-self:start;width:100%}
+  .fact b{font-size:11px}
+  .stage{grid-template-columns:minmax(0,1fr)}
+  .stage .side{display:none}
+  .stage .arrow.prev{left:12px}.stage .arrow.next{right:12px}
+  .stage .count{right:16px}
+  .smart-photo{position:relative;top:auto}
   .smart-photo img{aspect-ratio:4/3}
-  .enq-copy{position:static}
-  .price-grid{grid-template-columns:minmax(0,1fr)}
-  .p-main,.p-plan,.p-yield,.free{grid-column:auto}
-  .control{grid-template-columns:1fr 1fr}
+  .control{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .system-grid{grid-template-columns:minmax(0,1fr)}
+  .cluster + .cluster{border-left:0;border-top:1px solid var(--line)}
+  .plan-box{border-right:0;border-bottom:1px solid var(--line)}
+  .sheet{grid-template-columns:minmax(0,1fr)}
+  .sheet-side{border-right:0;border-bottom:1px solid var(--line-2);grid-auto-flow:column;justify-content:center;padding:18px}
+  .enq-side{min-height:300px}
 }
 @media (max-width: 640px){
-  .brand span{display:none}
-  .system-grid,.loc-grid{grid-template-columns:minmax(0,1fr)}
-  .free{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .free b{font-size:24px}
-  .free div{min-height:120px}
+  .nav .btn{display:none}
+  .nav-right{gap:0}
+  .timeline{grid-template-columns:minmax(0,1fr);row-gap:22px;padding:0 0 0 44px}
+  .timeline::after{left:13px;right:auto;top:0;bottom:0;width:1px;height:auto;background:var(--ink-2)}
+  .timeline div{text-align:left;align-content:start}
+  .timeline div::after{left:-44px;top:0;bottom:auto;translate:0 0;width:22px;height:22px}
+  .loc-grid{grid-template-columns:minmax(0,1fr)}
+  .loc:nth-child(even){border-left:0}
+  .feats{grid-template-columns:minmax(0,1fr)}
+  .feats > div + div{border-left:0;border-top:1px solid var(--line)}
+  .tabs .btn{min-width:0;flex:1}
   .row2{grid-template-columns:minmax(0,1fr)}
-  .level #lvl{font-size:clamp(96px,28vw,140px)}
-  .build h2{font-size:28px}
-  .build{height:220vh}
-  .p-new{font-size:clamp(66px,21vw,100px)}
-  .p-new small{display:block;margin:8px 0 0}
+  .incl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .incl div:nth-child(odd){border-left:0}
+  .incl div:nth-child(even){border-left:1px solid var(--line)}
+  .incl div:nth-child(n+3){border-top:1px solid var(--line)}
+  .level #lvl{font-size:clamp(90px,26vw,130px)}
+  .build h2{font-size:20px}
   .foot{grid-template-columns:minmax(0,1fr)}
+  .foot .call{text-align:left}
+  /* Rate sheet becomes one card per floor */
+  .rates thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .rates tbody tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line-2)}
+  .rates tbody td{display:grid;gap:6px;border:0!important;padding:12px 10px;font-size:15.5px}
+  .rates tbody td::before{content:attr(data-label);font:400 9.5px/1.3 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .rates tbody td:first-child{grid-column:1/-1;padding:16px 14px 4px;font-size:15px;font-weight:500}
+  .rates tbody td:first-child::before{content:none}
+  .rates tbody td.rate{font-size:17px}
 }
-@media (prefers-reduced-motion: reduce){ .track{animation:none} }
+@media (prefers-reduced-motion: reduce){
+  .track{animation:none}
+  .slide,.slide img,.stage img{transition:none}
+}
 </style>
 </head>
 <body>
-<div class="sky" aria-hidden="true"></div>
+<div class="silk" aria-hidden="true"></div>
 
 <header class="nav">
   <div class="nav-in">
-    <a class="brand" href="#top" aria-label="SYNQ home"><b>SYNQ</b><span>IQ Suites by High Life</span></a>
     <nav class="nav-links" aria-label="Sections">
-      <a href="#smart">Smart living</a>
-      <a href="#homes">Homes</a>
+      <a href="#project">The project</a>
       <a href="#location">Location</a>
-      <a href="#price">Price</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#homes">Homes</a>
+      <a href="#rates">Rate sheet</a>
     </nav>
-    <a class="btn btn-primary" href="#enquire">Enquire now</a>
+    <a class="brand" href="#top" aria-label="SYNQ home"><b>SYNQ</b><span>IQ Suites by High Life</span></a>
+    <div class="nav-right">
+      <a class="nav-phone num" href="tel:+919999434837"><small>Call sales</small>+91 99994 34837</a>
+      <a class="btn btn-gold" href="#enquire">Enquire now</a>
+    </div>
   </div>
 </header>
 
+<a class="btn btn-gold float-cta" href="#enquire">Enquire now</a>
+
 <main id="top">
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow" data-in>IQ Suites by High Life, Greater Noida West</p>
-        <h1 data-in>A home that<br>runs <em>itself.</em></h1>
-        <p class="lede" data-in>Fully furnished 1 &amp; 2 BHK studio apartments with SYNQ smart living built in, facing a 100 metre green belt.</p>
-        <div class="cta-row" data-in>
-          <a class="btn btn-primary" href="#enquire">Enquire now <span class="arr">&rarr;</span></a>
-          <a class="btn btn-ghost" href="#homes">See unit plans</a>
-        </div>
+  <!-- HERO -->
+  <section class="hero" style="padding-inline:0">
+    <div class="hero-grid">
+      <div class="slider" id="hero-slider" aria-roledescription="carousel" aria-label="Project images">
+        <div class="slide on"><img src="img/tower.webp" alt="The SYNQ tower at dusk above landscaped gardens" width="1400" height="787" fetchpriority="high"><span class="caption">Artistic impression</span></div>
+        <div class="slide"><img src="img/aerial.webp" alt="Aerial view of Greater Noida West at night" width="1600" height="900" loading="lazy"><span class="caption">Artistic impression</span></div>
+        <div class="slide"><img src="img/interior.webp" alt="Furnished dining corner with pendant lights and full-height glazing" width="1200" height="675" loading="lazy"><span class="caption">Artistic impression</span></div>
+        <button class="arrow prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="arrow next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        <div class="dots" role="group" aria-label="Choose image"></div>
       </div>
-      <figure class="hero-media" data-in>
-        <div class="ph"><img src="img/tower.webp" alt="Artist's impression of the tower at dusk above landscaped gardens" width="1400" height="787" fetchpriority="high"></div>
-        <span class="hero-tag">G+18 premium high-rise</span>
-        <div class="hero-price glass">
-          <small>Own an AI home from</small>
-          <span class="big num">&#8377;40 Lakh*</span>
-          <small>*NPV mandatory</small>
+      <div class="panel">
+        <div class="mark" data-in><b>SYNQ</b><span>IQ Suites</span></div>
+        <p class="by" data-in>by<b>High Life</b></p>
+        <p class="loc" data-in>Techzone-4, Greater Noida West</p>
+        <h1 data-in>1 &amp; 2 BHK AI smart homes, fully furnished</h1>
+        <p class="lede" data-in>A home that runs itself, facing a 100 metre green belt and built by NBCC.</p>
+        <div class="cta" data-in>
+          <a class="btn btn-gold" href="#enquire">Enquire now</a>
+          <a class="btn btn-grey" href="#rates">View rate sheet</a>
         </div>
-      </figure>
+        <p class="foot" data-in>Schedule your site visit today</p>
+      </div>
     </div>
   </section>
 
-  <section class="trust" aria-label="Why High Life">
-    <div class="wrap trust-grid">
-      <div data-rv><b>NBCC</b><span>Built by NBCC (India) Ltd., the Navratna PSU behind AIIMS Delhi and Parliament.</span></div>
-      <div data-rv><b>Court monitored</b><span>Delivered under a Supreme Court appointed court receiver.</span></div>
-      <div data-rv><b class="num">130 m</b><span>Road frontage on the Noida and Greater Noida Link Road.</span></div>
-      <div data-rv><b class="num">18 years</b><span>Of legacy behind the brand, with Great Value Realty and Yatharth Group.</span></div>
+  <!-- INTRO -->
+  <section class="intro" id="project">
+    <div class="wrap">
+      <div class="title">
+        <div class="lockup" data-rv><b>HIGH LIFE</b><i>&times;</i><b>SYNQ</b></div>
+        <span class="sub" data-rv>An AI home collaboration</span>
+        <p data-rv>High Life brings SYNQ smart living into every studio residence. Light, curtains, climate and security answer to one screen, one voice or one tap, from anywhere. The tower is built by NBCC (India) Ltd., the Navratna PSU behind AIIMS Delhi and Parliament, under a Supreme Court appointed court receiver.</p>
+      </div>
+      <div class="feats">
+        <div data-rv><b>Built by NBCC</b><span>Government of India Navratna PSU, court monitored delivery</span></div>
+        <div data-rv><b>100 m green belt</b><span>Fully developed, directly in front of the tower</span></div>
+        <div data-rv><b class="num">130 m road</b><span>Frontage on the Noida and Greater Noida Link Road</span></div>
+        <div data-rv><b>1 &amp; 2 BHK</b><span>Fully furnished smart studio residences</span></div>
+      </div>
     </div>
   </section>
 
+  <!-- BUILD -->
   <section class="build" id="build" aria-label="Construction">
     <div class="build-pin">
       <div class="build-grid">
@@ -410,34 +515,108 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
           <img class="ghost" src="img/tower.webp" alt="" width="1400" height="787" loading="lazy">
           <img class="real" id="rise" src="img/tower.webp" alt="" width="1400" height="787" loading="lazy">
           <div class="edge" id="edge"><span id="edge-label">Ground floor</span></div>
+          <span class="caption">Artistic impression</span>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- LOCATION -->
+  <section class="location" id="location">
+    <div class="wrap">
+      <div class="title">
+        <h2 data-rv>A landmark address in Greater Noida West</h2>
+        <span class="sub" data-rv>Aspire Dream Valley Phase III, Techzone-4</span>
+        <p data-rv>On the 130 metre wide Noida and Greater Noida Link Road, with a fully developed green belt in front and schools, hospitals and business parks within minutes.</p>
+        <div class="rule" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="timeline" data-rv>
+        <div><b>Link Road frontage</b><span>Noida to Greater Noida</span></div>
+        <div><b>Approx 6 min to</b><span>Yatharth Super Speciality Hospital</span></div>
+        <div><b>Approx 10 min to</b><span>Delhi-Meerut Expressway</span></div>
+        <div><b>Approx 55 min to</b><span>Noida International Airport</span></div>
+        <div><b>Approx 60 min to</b><span>IGI Airport</span></div>
+      </div>
+      <div class="loc-grid">
+        <div class="loc" data-rv><h3>Schools and colleges</h3><ul>
+          <li><span>Ryan International School</span><span class="t num">4<small>min</small></span></li>
+          <li><span>The Shri Ram Universal School</span><span class="t num">6<small>min</small></span></li>
+          <li><span>Pacific World School</span><span class="t num">6<small>min</small></span></li>
+          <li><span>JBM Smart Start</span><span class="t num">7<small>min</small></span></li>
+          <li><span>Lotus Valley International School</span><span class="t num">8<small>min</small></span></li></ul></div>
+        <div class="loc" data-rv><h3>Health care</h3><ul>
+          <li><span>Yatharth Super Speciality Hospital</span><span class="t num">6<small>min</small></span></li>
+          <li><span>Fortis Hospital</span><span class="t num">19<small>min</small></span></li>
+          <li><span>Kailash Hospital</span><span class="t num">25<small>min</small></span></li></ul></div>
+        <div class="loc" data-rv><h3>Business parks</h3><ul>
+          <li><span>R Systems</span><span class="t num">6<small>min</small></span></li>
+          <li><span>Artha Infratech</span><span class="t num">6<small>min</small></span></li>
+          <li><span>Golden I</span><span class="t num">7<small>min</small></span></li>
+          <li><span>Yotta Data Center Park</span><span class="t num">10<small>min</small></span></li></ul></div>
+        <div class="loc" data-rv><h3>Shopping</h3><ul>
+          <li><span>Blue Sapphire Mall</span><span class="t num">6<small>min</small></span></li>
+          <li><span>D-Mart</span><span class="t num">7<small>min</small></span></li>
+          <li><span>Gaur City Center &amp; Mall</span><span class="t num">9<small>min</small></span></li></ul></div>
+        <div class="loc" data-rv><h3>Hotels</h3><ul>
+          <li><span>Holiday Inn</span><span class="t num">6<small>min</small></span></li>
+          <li><span>Radisson Blu</span><span class="t num">8<small>min</small></span></li>
+          <li><span>Hibiscus Hotel</span><span class="t num">8<small>min</small></span></li>
+          <li><span>Gaur Sarovar Portico</span><span class="t num">12<small>min</small></span></li></ul></div>
+        <div class="loc" data-rv><h3>Airports</h3><ul>
+          <li><span>Noida International Airport, Jewar</span><span class="t num">55<small>min</small></span></li>
+          <li><span>Indira Gandhi International Airport</span><span class="t num">60<small>min</small></span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="wrap">
+      <div class="title">
+        <h2 data-rv>An architectural marvel</h2>
+        <p data-rv>A calm stone and glass tower with gold fins, rising above its own gardens. Inside, furnished studios planned so every square foot works.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Gallery">
+        <button class="btn btn-gold" role="tab" aria-selected="true" data-set="exterior">Exterior</button>
+        <button class="btn btn-gold" role="tab" aria-selected="false" data-set="interior">Interior</button>
+      </div>
+      <div class="stage" data-rv>
+        <figure class="side" id="g-prev" aria-hidden="true"><img alt="" src="img/aerial.webp" width="1600" height="900" loading="lazy"></figure>
+        <figure class="main"><img id="g-main" src="img/tower.webp" alt="The SYNQ tower at dusk" width="1400" height="787" loading="lazy"><span class="caption">Artistic impression</span></figure>
+        <figure class="side" id="g-next" aria-hidden="true"><img alt="" src="img/aerial.webp" width="1600" height="900" loading="lazy"></figure>
+        <button class="arrow prev" type="button" id="g-left" aria-label="Previous image"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="arrow next" type="button" id="g-right" aria-label="Next image"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+        <span class="count num" id="g-count">1 / 2</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMART LIVING -->
   <section class="smart" id="smart">
     <div class="wrap smart-grid">
       <div class="smart-copy">
-        <p class="eyebrow">SYNQ smart living</p>
-        <h2 class="h2" data-rv>One room,<br><em>four identities.</em></h2>
-        <p class="lede" data-rv>Tap once and light, curtains and climate change together. Pick a scene and see the room change with it.</p>
+        <div class="title">
+          <h2 data-rv>One room, four identities</h2>
+          <span class="sub" data-rv>SYNQ smart living</span>
+          <p data-rv>Tap once and light, curtains and climate change together. Pick a scene and see the room change with it.</p>
+        </div>
         <div class="modes" role="tablist" aria-label="Room scenes">
           <button class="mode" role="tab" aria-selected="true" data-mode="routine">Routine</button>
           <button class="mode" role="tab" aria-selected="false" data-mode="relax">Relax</button>
           <button class="mode" role="tab" aria-selected="false" data-mode="master">Master</button>
           <button class="mode" role="tab" aria-selected="false" data-mode="work">Work</button>
         </div>
-        <div class="glass mode-card" role="tabpanel" aria-live="polite">
+        <div class="mode-card" role="tabpanel" aria-live="polite">
           <span class="room" id="mc-room">Guest room</span>
           <h3 id="mc-title">Routine</h3>
           <p id="mc-text">Natural white across every point, the flat at its most open.</p>
           <div class="swatch"><span><i id="mc-sw" style="--c:#F3EEDF"></i><em id="mc-light" style="font-style:normal">Natural white</em></span><span id="mc-curtain">Curtains open</span></div>
         </div>
         <div class="control" data-rv>
-          <div class="glass"><b>App</b><span>On your phone, from anywhere</span></div>
-          <div class="glass"><b>Voice</b><span>Alexa, built in</span></div>
-          <div class="glass"><b>Panel</b><span>8-inch digital screen</span></div>
-          <div class="glass"><b>Auto</b><span>Scenes, no touch</span></div>
+          <div><b>App</b><span>On your phone, from anywhere</span></div>
+          <div><b>Voice</b><span>Alexa, built in</span></div>
+          <div><b>Panel</b><span>8-inch digital screen</span></div>
+          <div><b>Auto</b><span>Scenes, no touch</span></div>
         </div>
       </div>
       <figure class="smart-photo" id="room" data-rv>
@@ -448,45 +627,51 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
     </div>
   </section>
 
+  <!-- SYSTEM -->
   <section class="system" aria-labelledby="sys-h">
-    <div class="wrap system-grid">
-      <div class="sys-photo" data-rv><img src="img/interior.webp" alt="Furnished dining corner with pendant lights and full-height glazing" width="1200" height="675" loading="lazy"></div>
-      <div class="sys-head">
-        <h2 class="h2" id="sys-h" data-rv>What goes into <em>every home.</em></h2>
-        <p class="lede" data-rv>Nine SYNQ components, installed and tuned before you move in.</p>
+    <div class="wrap">
+      <div class="title">
+        <h2 id="sys-h" data-rv>What goes into every home</h2>
+        <p data-rv>Nine SYNQ components, installed and tuned before you move in.</p>
       </div>
-      <div class="glass cluster" data-rv>
-        <h3>Control</h3>
-        <dl>
-          <div><dt>SYNQ Switches</dt><dd>Touch glass with a gold bezel. No exposed mechanical contacts, so they are shockproof.</dd></div>
-          <div><dt>SYNQ Interface</dt><dd>8-inch touch screen with Alexa built in. One screen for light and climate.</dd></div>
-          <div><dt>SYNQ Gateway</dt><dd>Zigbee wired gateway that ties every device together.</dd></div>
-        </dl>
-      </div>
-      <div class="glass cluster" data-rv>
-        <h3>Comfort</h3>
-        <dl>
-          <div><dt>SYNQ Lighting</dt><dd>17 smart tunable points. Cove, spots and lamps on one circuit.</dd></div>
-          <div><dt>SYNQ Climate</dt><dd>IR blaster, so the AC is on before you reach home.</dd></div>
-          <div><dt>SYNQ Motion</dt><dd>Motorised curtain track, run by a scene, by time or by voice.</dd></div>
-        </dl>
-      </div>
-      <div class="glass cluster" data-rv>
-        <h3>Safety</h3>
-        <dl>
-          <div><dt>SYNQ Sense</dt><dd>Contact sensor on the entry door, motion sensor in the washroom.</dd></div>
-          <div><dt>Wi-Fi cameras</dt><dd>Live video with motion and person detection.</dd></div>
-          <div><dt>SYNQ Retrofit</dt><dd>Retrofit relay, 40A variant, for heavy appliances.</dd></div>
-        </dl>
+      <div class="system-grid">
+        <div class="cluster" data-rv>
+          <h3>Control</h3>
+          <dl>
+            <div><dt>SYNQ Switches</dt><dd>Touch glass with a gold bezel. No exposed mechanical contacts, so they are shockproof.</dd></div>
+            <div><dt>SYNQ Interface</dt><dd>8-inch touch screen with Alexa built in. One screen for light and climate.</dd></div>
+            <div><dt>SYNQ Gateway</dt><dd>Zigbee wired gateway that ties every device together.</dd></div>
+          </dl>
+        </div>
+        <div class="cluster" data-rv>
+          <h3>Comfort</h3>
+          <dl>
+            <div><dt>SYNQ Lighting</dt><dd>17 smart tunable points. Cove, spots and lamps on one circuit.</dd></div>
+            <div><dt>SYNQ Climate</dt><dd>IR blaster, so the AC is on before you reach home.</dd></div>
+            <div><dt>SYNQ Motion</dt><dd>Motorised curtain track, run by a scene, by time or by voice.</dd></div>
+          </dl>
+        </div>
+        <div class="cluster" data-rv>
+          <h3>Safety</h3>
+          <dl>
+            <div><dt>SYNQ Sense</dt><dd>Contact sensor on the entry door, motion sensor in the washroom.</dd></div>
+            <div><dt>Wi-Fi cameras</dt><dd>Live video with motion and person detection.</dd></div>
+            <div><dt>SYNQ Retrofit</dt><dd>Retrofit relay, 40A variant, for heavy appliances.</dd></div>
+          </dl>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- UNITS -->
   <section class="units" id="homes" aria-labelledby="units-h">
     <div class="wrap">
-      <h2 class="h2" id="units-h" data-rv>Two layouts.<br><em>Both fully furnished.</em></h2>
-      <div class="units-grid">
-        <div class="glass plan-box">
+      <div class="title">
+        <h2 id="units-h" data-rv>Two layouts, both fully furnished</h2>
+        <span class="sub" data-rv>1 BHK and 2 BHK studio residences</span>
+      </div>
+      <div class="units-grid" data-rv>
+        <div class="plan-box">
           <div class="plan-top">
             <div class="seg" role="tablist" aria-label="Unit type">
               <button role="tab" aria-selected="true" data-unit="1">1 BHK</button>
@@ -496,7 +681,7 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
           </div>
           <svg class="plan-svg" id="plan" role="img" aria-label="Unit floor plan"></svg>
         </div>
-        <div class="glass areas" aria-live="polite">
+        <div class="areas" aria-live="polite">
           <div class="area main"><span class="k">Total saleable area</span><span class="v num" id="a-sale">964<small>sq.ft</small></span><span class="m" id="a-sale-m">89.60 sq.m</span></div>
           <div class="area"><span class="k">Total built-up area</span><span class="v num" id="a-built">593<small>sq.ft</small></span><span class="m" id="a-built-m">55.10 sq.m</span></div>
           <div class="area"><span class="k">Total carpet area</span><span class="v num" id="a-carpet">456<small>sq.ft</small></span><span class="m" id="a-carpet-m">42.32 sq.m</span></div>
@@ -506,54 +691,14 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
     </div>
   </section>
 
-  <section class="location" id="location" aria-labelledby="loc-h">
-    <div class="wrap">
-      <div class="loc-band" data-rv>
-        <img src="img/aerial.webp" alt="Aerial view of the Greater Noida West skyline at night" width="1600" height="900" loading="lazy">
-        <div>
-          <h2 class="h2" id="loc-h">In the heart of<br><em>Greater Noida West.</em></h2>
-          <div class="routes"><span>Via NH 24</span><span>Noida and Greater Noida Link Road</span><span>Via F&amp;G</span><span>Delhi-Meerut Expressway</span></div>
-        </div>
-      </div>
-      <div class="loc-grid">
-        <div class="glass loc" data-rv><h3>Schools and colleges</h3><ul>
-          <li><span>Ryan International School</span><span class="t num">4<small>min</small></span></li>
-          <li><span>The Shri Ram Universal School</span><span class="t num">6<small>min</small></span></li>
-          <li><span>Pacific World School</span><span class="t num">6<small>min</small></span></li>
-          <li><span>JBM Smart Start</span><span class="t num">7<small>min</small></span></li>
-          <li><span>Lotus Valley International School</span><span class="t num">8<small>min</small></span></li></ul></div>
-        <div class="glass loc" data-rv><h3>Health care</h3><ul>
-          <li><span>Yatharth Super Speciality Hospital</span><span class="t num">6<small>min</small></span></li>
-          <li><span>Fortis Hospital</span><span class="t num">19<small>min</small></span></li>
-          <li><span>Kailash Hospital</span><span class="t num">25<small>min</small></span></li></ul></div>
-        <div class="glass loc" data-rv><h3>Business parks</h3><ul>
-          <li><span>R Systems</span><span class="t num">6<small>min</small></span></li>
-          <li><span>Artha Infratech</span><span class="t num">6<small>min</small></span></li>
-          <li><span>Golden I</span><span class="t num">7<small>min</small></span></li>
-          <li><span>Yotta Data Center Park</span><span class="t num">10<small>min</small></span></li></ul></div>
-        <div class="glass loc" data-rv><h3>Shopping</h3><ul>
-          <li><span>Blue Sapphire Mall</span><span class="t num">6<small>min</small></span></li>
-          <li><span>D-Mart</span><span class="t num">7<small>min</small></span></li>
-          <li><span>Gaur City Center &amp; Mall</span><span class="t num">9<small>min</small></span></li></ul></div>
-        <div class="glass loc" data-rv><h3>Hotels</h3><ul>
-          <li><span>Holiday Inn</span><span class="t num">6<small>min</small></span></li>
-          <li><span>Radisson Blu</span><span class="t num">8<small>min</small></span></li>
-          <li><span>Hibiscus Hotel</span><span class="t num">8<small>min</small></span></li>
-          <li><span>Gaur Sarovar Portico</span><span class="t num">12<small>min</small></span></li></ul></div>
-        <div class="glass loc" data-rv><h3>Airports</h3><ul>
-          <li><span>Noida International Airport, Jewar</span><span class="t num">55<small>min</small></span></li>
-          <li><span>Indira Gandhi International Airport</span><span class="t num">60<small>min</small></span></li></ul></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- GREEN + AMENITIES -->
   <section class="green" aria-labelledby="green-h">
     <div class="wrap green-grid">
-      <div class="green-img" data-rv><img src="img/tower.webp" alt="Artist's impression of the tower above its landscaped grounds" width="1400" height="787" loading="lazy"></div>
+      <figure class="green-img" data-rv><img src="img/aerial.webp" alt="Greater Noida West skyline around the site" width="1600" height="900" loading="lazy"><span class="caption">Artistic impression</span></figure>
       <div class="green-copy">
         <div class="big num" data-rv>100<small>metres of green</small></div>
-        <h2 class="h2" id="green-h" style="font-size:clamp(34px,3.6vw,52px)" data-rv>Facing a fully developed green belt.</h2>
-        <p class="lede" data-rv>Open views on one side, the city's busiest link road on the other. A 10,000 sq.ft wellness floor in every tower.</p>
+        <h2 id="green-h" data-rv>Curated amenities</h2>
+        <p data-rv>A clubhouse with a swimming pool, landscaped gardens and a 10,000 sq.ft wellness floor in every tower.</p>
         <div class="wellness" data-rv><span>Pro gym</span><span>Yoga studio</span><span>Indoor games</span><span>Crèche</span><span>Multi-purpose hall</span></div>
       </div>
     </div>
@@ -565,43 +710,63 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
     </div>
   </div>
 
-  <section class="price" id="price" aria-labelledby="price-h">
+  <!-- RATE SHEET -->
+  <section class="rates-sec" id="rates" aria-labelledby="rates-h">
     <div class="wrap">
-      <p class="eyebrow">Limited time offer</p>
-      <h2 class="h2" id="price-h" style="margin-top:16px" data-rv>Now, <em>the price.</em></h2>
-      <div class="price-grid">
-        <div class="glass p-main" data-rv>
-          <span class="p-old num">&#8377;11,600 per sq.ft</span>
-          <div class="p-new num"><span id="price-count">&#8377;10,600</span><small>per sq.ft</small></div>
-          <span class="hint">Basic price for a limited time.</span>
+      <div class="title">
+        <h2 id="rates-h" data-rv>Project rate sheet</h2>
+        <div class="rule" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="sheet" data-rv>
+        <div class="sheet-side" aria-hidden="true">
+          <div class="ico"><svg viewBox="0 0 40 40"><path d="M6 36h28M9 36V14l9-4v26M18 36V6l13 5v25M22 14h5M22 19h5M22 24h5M22 29h5M12 18h3M12 23h3M12 28h3"/></svg></div>
+          <b>Jewel<br>Crest</b>
+          <span>Floor-wise rates</span>
         </div>
-        <div class="glass p-plan" data-rv>
-          <span class="hint">Payment plan</span>
-          <span class="ratio num">40<i>:</i>40<i>:</i>20</span>
-          <p>Construction-linked, as mentioned in the price list.</p>
+        <div style="overflow-x:auto">
+          <table class="rates">
+            <caption>Jewel Crest</caption>
+            <thead>
+              <tr><th scope="col">Floor</th><th scope="col">AR MG rate (&#8377;)</th><th scope="col">Rental for 2 years (&#8377;)</th><th scope="col">CAP (&#8377;)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lower Ground Floor (Anchor)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;38,000</td><td data-label="Rental for 2 years (&#8377;)">200</td><td class="na" data-label="CAP (&#8377;)">NA</td></tr>
+              <tr><td>Ground Floor</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;55,000</td><td class="na" data-label="Rental for 2 years (&#8377;)">NA</td><td data-label="CAP (&#8377;)">&#8377;44,000</td></tr>
+              <tr><td>First Floor</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;40,000</td><td data-label="Rental for 2 years (&#8377;)">215</td><td data-label="CAP (&#8377;)">&#8377;30,000</td></tr>
+              <tr><td>Second Floor</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;36,000</td><td data-label="Rental for 2 years (&#8377;)">200</td><td data-label="CAP (&#8377;)">&#8377;28,000</td></tr>
+              <tr><td>Third Floor (Restaurants)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;29,500</td><td class="na" data-label="Rental for 2 years (&#8377;)">NA</td><td data-label="CAP (&#8377;)">&#8377;26,000</td></tr>
+              <tr><td>Third Floor (Food Court)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;35,000</td><td data-label="Rental for 2 years (&#8377;)">180</td><td data-label="CAP (&#8377;)">&#8377;26,500</td></tr>
+              <tr><td>Third Floor (Anchor)</td><td class="rate" data-label="AR MG rate (&#8377;)">&#8377;36,000</td><td data-label="Rental for 2 years (&#8377;)">190</td><td class="na" data-label="CAP (&#8377;)">NA</td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="glass p-yield" data-rv>
-          <b>Pay 40%, get <em class="num">&#8377;40,000</em> a month</b>
-          <span>Paid to you every month till possession. *NPV mandatory.</span>
-        </div>
-        <div class="free">
-          <div class="glass" data-rv><span>Included</span><b>Fully furnished</b><small>Move in with just your bags.</small></div>
-          <div class="glass" data-rv><span>Free</span><b>Power backup</b></div>
-          <div class="glass" data-rv><span>Free</span><b>2-year maintenance</b></div>
-          <div class="glass" data-rv><span>Free</span><b>GST</b></div>
-          <div class="glass" data-rv><span>Free*</span><b>Car parking</b><small>2 BHK only</small></div>
-        </div>
+      </div>
+      <p class="rates-note">Rates as per the Jewel Crest project rate sheet. Call +91 99994 34837 for the full price list and current availability.</p>
+
+      <p class="incl-head">Included with every SYNQ home</p>
+      <div class="incl">
+        <div data-rv><span>Included</span><b>Fully furnished</b><small>Move in with just your bags</small></div>
+        <div data-rv><span>Free</span><b>Power backup</b></div>
+        <div data-rv><span>Free</span><b>2-year maintenance</b></div>
+        <div data-rv><span>Free</span><b>GST</b></div>
+        <div data-rv><span>Free*</span><b>Car parking</b><small>2 BHK only</small></div>
       </div>
     </div>
   </section>
 
+  <!-- ENQUIRE -->
   <section class="enquire" id="enquire" aria-labelledby="enq-h">
     <div class="wrap enq-grid">
-      <div class="enq-copy">
-        <h2 class="h2" id="enq-h">Book your<br><em>site visit.</em></h2>
-        <p class="lede">Leave your details and send them on WhatsApp. The sales team will reply with the price list, floor availability and a visit slot.</p>
+      <div class="enq-side">
+        <img src="img/tower.webp" alt="" width="1400" height="787" loading="lazy">
+        <div class="over">
+          <small>Talk to the sales team</small>
+          <a class="num" href="tel:+919999434837">+91 99994 34837</a>
+          <p>Call or send your details on WhatsApp for the price list, floor availability and a site visit slot.</p>
+        </div>
       </div>
-      <form class="glass" id="enq" novalidate>
+      <form class="enq" id="enq" novalidate>
+        <h2 id="enq-h">Enquire now</h2>
         <div class="row2">
           <div class="field">
             <label for="f-name">Full name <i>*</i></label>
@@ -609,21 +774,20 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
             <p class="err" id="e-name" role="alert"></p>
           </div>
           <div class="field">
-            <label for="f-phone">Phone <i>*</i></label>
+            <label for="f-phone">Phone number <i>*</i></label>
             <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98110 42736" required>
             <p class="err" id="e-phone" role="alert"></p>
           </div>
         </div>
         <div class="row2">
           <div class="field">
-            <label for="f-email">Email</label>
+            <label for="f-email">Email address</label>
             <input id="f-email" name="email" type="email" autocomplete="email" spellcheck="false" placeholder="you@example.com">
             <p class="err" id="e-email" role="alert"></p>
           </div>
           <div class="field">
             <label for="f-date">Preferred visit date</label>
             <input id="f-date" name="visit" type="date">
-            <p class="help">Optional. The slot is confirmed on call.</p>
           </div>
         </div>
         <fieldset class="field">
@@ -631,7 +795,8 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
           <div class="chips">
             <label><input type="radio" name="unit" id="f-u1" value="1 BHK" checked><span>1 BHK</span></label>
             <label><input type="radio" name="unit" id="f-u2" value="2 BHK"><span>2 BHK</span></label>
-            <label><input type="radio" name="unit" id="f-u3" value="Not sure yet"><span>Not sure yet</span></label>
+            <label><input type="radio" name="unit" id="f-u3" value="Jewel Crest commercial"><span>Commercial</span></label>
+            <label><input type="radio" name="unit" id="f-u4" value="Not sure yet"><span>Not sure yet</span></label>
           </div>
         </fieldset>
         <div class="field">
@@ -640,7 +805,7 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
         </div>
         <div class="form-foot">
           <p class="help">Sends your enquiry to the sales team on WhatsApp.</p>
-          <button class="btn btn-primary" type="submit" id="f-submit">Send on WhatsApp <span class="arr">&rarr;</span></button>
+          <button class="btn btn-gold" type="submit" id="f-submit">Submit</button>
         </div>
         <div class="status" id="f-status" hidden role="status"></div>
       </form>
@@ -652,7 +817,8 @@ footer{padding:48px var(--gutter) calc(40px + env(safe-area-inset-bottom,0px));b
   <div class="foot">
     <img src="img/logo-dark.webp" alt="Moneytree Realty" width="520" height="130">
     <p>SYNQ, IQ Suites by High Life, Aspire Dream Valley Phase III, Techzone-4, Greater Noida West. Presented by Moneytree Realty with Great Value Realty and Sanskar Realty (Yatharth Group), authorised marketing partners. Built by NBCC (India) Ltd.</p>
-    <p class="legal">*NPV mandatory. Prices, payment plan and offers are as mentioned in the official price list and may change without notice. Images are artist's impressions.</p>
+    <a class="call num" href="tel:+919999434837"><small>Sales enquiries</small>+91 99994 34837</a>
+    <p class="legal">Rates are as per the Jewel Crest project rate sheet and may change without notice. Offers and inclusions are as mentioned in the official price list. All images are artistic impressions.</p>
   </div>
 </footer>
 
@@ -673,24 +839,35 @@ if (!reduce && window.Lenis && hasGsap) {
   gsap.ticker.add(t => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
 }
+const headH = () => document.querySelector('.nav').offsetHeight;
 document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
   const id = a.getAttribute('href');
   if (id === '#top') { e.preventDefault(); lenis ? lenis.scrollTo(0) : scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); return; }
   const el = id.length > 1 && document.querySelector(id); if (!el) return;
-  e.preventDefault(); lenis ? lenis.scrollTo(el, { offset: -70 }) : el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  e.preventDefault(); lenis ? lenis.scrollTo(el, { offset: -headH() + 1 }) : el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
 }));
 
-/* Scene state */
-const S = { build: reduce ? 1 : 0, intro: reduce ? 1 : 0 };
-const MODES = {
-  routine: { hex: '#F6EEDC', tint: '#FFF7E8', blend: 'soft-light', op: .35, bright: 1.05, sat: 1, room: 'Guest room', title: 'Routine', light: 'Natural white', curtain: 'Curtains open', text: 'Natural white across every point, the flat at its most open.' },
-  relax:   { hex: '#FF9C52', tint: '#FF8A3D', blend: 'multiply', op: .34, bright: .88, sat: 1.1, room: 'Family room', title: 'Relax', light: 'Warm light', curtain: 'Curtains halfway', text: 'Warm light and curtains drawn halfway, the evening settling in.' },
-  master:  { hex: '#FFD98A', tint: '#FFD98A', blend: 'screen', op: .32, bright: 1.12, sat: 1.15, room: 'Party room', title: 'Master', light: 'Everything on', curtain: 'Curtains open', text: 'Everything up at once, the whole floor lit in a single press.' },
-  work:    { hex: '#C6E2FF', tint: '#9CC8FF', blend: 'soft-light', op: .6, bright: 1, sat: .85, room: 'Work room', title: 'Work', light: 'Cool white', curtain: 'Curtains closed', text: 'Cool white over the desk while the rest of the room steps back.' }
-};
-const PODIUM = 5; // G + 4 commercial floors
+/* Hero slider */
+(() => {
+  const root = document.getElementById('hero-slider'), slides = [...root.querySelectorAll('.slide')], dotsEl = root.querySelector('.dots');
+  let i = 0, timer = null;
+  const dots = slides.map((_, k) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Image ' + (k + 1)); b.addEventListener('click', () => { go(k); restart(); }); dotsEl.appendChild(b); return b; });
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    slides.forEach((s, k) => s.classList.toggle('on', k === i));
+    dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
+  }
+  function restart() { clearInterval(timer); if (!reduce) timer = setInterval(() => go(i + 1), 5500); }
+  root.querySelector('.prev').addEventListener('click', () => { go(i - 1); restart(); });
+  root.querySelector('.next').addEventListener('click', () => { go(i + 1); restart(); });
+  root.addEventListener('mouseenter', () => clearInterval(timer));
+  root.addEventListener('mouseleave', restart);
+  go(0); restart();
+})();
 
-/* Scroll choreography */
+/* Construction reveal */
+const PODIUM = 5;
+const S = { build: reduce ? 1 : 0, intro: reduce ? 1 : 0 };
 const rise = document.getElementById('rise'), edge = document.getElementById('edge'), edgeLabel = document.getElementById('edge-label');
 const lvl = document.getElementById('lvl'), zone = document.getElementById('lvl-zone'), bar = document.getElementById('bar'), facts = [...document.querySelectorAll('.fact')];
 function setLevel(b) {
@@ -698,36 +875,63 @@ function setLevel(b) {
   lvl.textContent = f === 0 ? 'G' : String(f).padStart(2, '0');
   zone.textContent = f < PODIUM ? 'Commercial podium' : 'Residences';
   bar.style.transform = `scaleX(${b})`;
-  const top = (1 - b) * 88 + 4; // tower occupies roughly the lower 92% of the frame
+  const top = (1 - b) * 88 + 4;
   rise.style.clipPath = `inset(${b >= .999 ? 0 : top}% 0 0 0)`;
   edge.style.top = top + '%'; edge.style.opacity = b >= .999 ? 0 : 1;
   edgeLabel.textContent = f === 0 ? 'Ground floor' : `Floor ${f}`;
   facts.forEach(el => el.classList.toggle('on', b >= +el.dataset.at));
 }
-if (hasGsap) {
-  if (!reduce) {
-    gsap.to(S, { intro: .2, duration: 2.6, ease: 'power2.out', delay: .2, onUpdate: () => setLevel(Math.max(S.intro, S.build)) });
-    gsap.from('[data-in]', { y: 34, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: .09, delay: .15 });
-    gsap.fromTo('.hero-media img', { scale: 1.14 }, { scale: 1.02, duration: 2.6, ease: 'power2.out' });
-    gsap.to('.hero-media img', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-    gsap.fromTo('.loc-band img', { yPercent: -6, scale: 1.12 }, { yPercent: 6, scale: 1.12, ease: 'none', scrollTrigger: { trigger: '.loc-band', start: 'top bottom', end: 'bottom top', scrub: true } });
-    ScrollTrigger.create({
-      trigger: '#build', start: 'top top', end: 'bottom bottom', pin: '.build-pin', pinSpacing: false,
-      onUpdate: s => { S.build = .2 + s.progress * .8; setLevel(Math.max(S.intro, S.build)); },
-      onLeave: () => { S.build = 1; setLevel(1); }
-    });
-    gsap.utils.toArray('[data-rv]').forEach(el => gsap.from(el, { y: 44, opacity: .1, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 88%', once: true } }));
-    const pc = document.getElementById('price-count'), o = { v: 11600 };
-    ScrollTrigger.create({ trigger: '#price', start: 'top 60%', once: true, onEnter: () => gsap.to(o, { v: 10600, duration: 1.6, ease: 'power3.out', onUpdate: () => { pc.textContent = '₹' + Math.round(o.v).toLocaleString('en-IN'); } }) });
-  } else { S.build = 1; setLevel(1); }
-} else { S.build = 1; setLevel(1); }
+if (hasGsap && !reduce) {
+  gsap.from('[data-in]', { y: 24, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: .08, delay: .2 });
+  ScrollTrigger.create({
+    trigger: '#build', start: 'top top', end: 'bottom bottom', pin: '.build-pin', pinSpacing: false,
+    onUpdate: s => { S.build = .2 + s.progress * .8; setLevel(S.build); },
+    onLeave: () => { S.build = 1; setLevel(1); }
+  });
+  setLevel(.2);
+  gsap.utils.toArray('[data-rv]').forEach(el => gsap.from(el, { y: 36, opacity: .1, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } }));
+  gsap.from('.rates tbody tr', { opacity: 0, x: -16, duration: .7, ease: 'expo.out', stagger: .07, scrollTrigger: { trigger: '.rates', start: 'top 80%', once: true } });
+  gsap.from('.timeline div', { opacity: 0, y: 20, duration: .8, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: '.timeline', start: 'top 85%', once: true } });
+} else { setLevel(1); }
 
-/* Scene switcher */
-const modeBtns = [...document.querySelectorAll('.mode')];
-const room = document.getElementById('room');
+/* Gallery */
+const GAL = {
+  exterior: [
+    { src: 'img/tower.webp', alt: 'The SYNQ tower at dusk above landscaped gardens', w: 1400, h: 787 },
+    { src: 'img/aerial.webp', alt: 'Aerial view of Greater Noida West at night', w: 1600, h: 900 }
+  ],
+  interior: [
+    { src: 'img/interior.webp', alt: 'Furnished dining corner with pendant lights and full-height glazing', w: 1200, h: 675 },
+    { src: 'img/curtain.webp', alt: 'Motorised curtains opening onto morning light', w: 1100, h: 619 }
+  ]
+};
+let gSet = 'exterior', gI = 0;
+const gMain = document.getElementById('g-main'), gPrev = document.querySelector('#g-prev img'), gNext = document.querySelector('#g-next img'), gCount = document.getElementById('g-count');
+function gShow(n) {
+  const L = GAL[gSet]; gI = (n + L.length) % L.length;
+  const cur = L[gI], p = L[(gI - 1 + L.length) % L.length], nx = L[(gI + 1) % L.length];
+  const swap = () => { gMain.src = cur.src; gMain.alt = cur.alt; gMain.width = cur.w; gMain.height = cur.h; gPrev.src = p.src; gNext.src = nx.src; gCount.textContent = `${gI + 1} / ${L.length}`; gMain.style.opacity = 1; };
+  if (reduce) swap(); else { gMain.style.opacity = 0; setTimeout(swap, 220); }
+}
+document.getElementById('g-left').addEventListener('click', () => gShow(gI - 1));
+document.getElementById('g-right').addEventListener('click', () => gShow(gI + 1));
+document.getElementById('g-prev').addEventListener('click', () => gShow(gI - 1));
+document.getElementById('g-next').addEventListener('click', () => gShow(gI + 1));
+const gTabs = [...document.querySelectorAll('.tabs button')];
+gTabs.forEach(b => b.addEventListener('click', () => { gSet = b.dataset.set; gTabs.forEach(x => x.setAttribute('aria-selected', String(x === b))); gShow(0); }));
+gShow(0);
+
+/* Smart scenes */
+const MODES = {
+  routine: { hex: '#F6EEDC', tint: '#FFF7E8', blend: 'soft-light', op: .35, bright: 1.05, sat: 1, room: 'Guest room', title: 'Routine', light: 'Natural white', curtain: 'Curtains open', text: 'Natural white across every point, the flat at its most open.' },
+  relax:   { hex: '#FF9C52', tint: '#FF8A3D', blend: 'multiply', op: .34, bright: .88, sat: 1.1, room: 'Family room', title: 'Relax', light: 'Warm light', curtain: 'Curtains halfway', text: 'Warm light and curtains drawn halfway, the evening settling in.' },
+  master:  { hex: '#FFD98A', tint: '#FFD98A', blend: 'screen', op: .32, bright: 1.12, sat: 1.15, room: 'Party room', title: 'Master', light: 'Everything on', curtain: 'Curtains open', text: 'Everything up at once, the whole floor lit in a single press.' },
+  work:    { hex: '#C6E2FF', tint: '#9CC8FF', blend: 'soft-light', op: .6, bright: 1, sat: .85, room: 'Work room', title: 'Work', light: 'Cool white', curtain: 'Curtains closed', text: 'Cool white over the desk while the rest of the room steps back.' }
+};
+const room = document.getElementById('room'), modeBtns = [...document.querySelectorAll('.mode')];
 function setMode(m) {
   const M = MODES[m];
-  [['--tint', M.tint], ['--blend', M.blend], ['--op', M.op], ['--bright', M.bright], ['--sat', M.sat]].forEach(([k, val]) => room.style.setProperty(k, val));
+  [['--tint', M.tint], ['--blend', M.blend], ['--op', M.op], ['--bright', M.bright], ['--sat', M.sat]].forEach(([k, v]) => room.style.setProperty(k, v));
   document.getElementById('room-cap').textContent = M.title + ' scene';
   modeBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.mode === m)));
   document.getElementById('mc-room').textContent = M.room;
@@ -736,7 +940,7 @@ function setMode(m) {
   document.getElementById('mc-light').textContent = M.light;
   document.getElementById('mc-curtain').textContent = M.curtain;
   document.getElementById('mc-sw').style.setProperty('--c', M.hex);
-  if (hasGsap && !reduce) gsap.fromTo('.mode-card h3, .mode-card p', { y: 12, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: 'expo.out', stagger: .05 });
+  if (hasGsap && !reduce) gsap.fromTo('.mode-card h3, .mode-card p', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: .5, ease: 'expo.out', stagger: .05 });
 }
 modeBtns.forEach((b, i) => {
   b.addEventListener('click', () => setMode(b.dataset.mode));
@@ -765,16 +969,16 @@ const UNITS = {
 };
 const svg = document.getElementById('plan'), roomsEl = document.getElementById('rooms'), NS = 'http://www.w3.org/2000/svg';
 function drawPlan(u) {
-  const U = UNITS[u], pad = 250, fs = u === 1 ? 300 : 330;
+  const U = UNITS[u], pad = 250, fs = u === 1 ? 290 : 320;
   svg.setAttribute('viewBox', `${-pad} ${-pad} ${U.w + pad * 2} ${U.h + pad * 2}`);
   svg.innerHTML = ''; roomsEl.innerHTML = '';
   U.rooms.forEach((R, i) => {
     const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'r');
     const rect = document.createElementNS(NS, 'rect');
-    Object.entries({ x: R.x, y: R.y, width: R.w, height: R.h, class: 'room ' + (R.c || ''), rx: 30 }).forEach(([k, val]) => rect.setAttribute(k, val));
+    Object.entries({ x: R.x, y: R.y, width: R.w, height: R.h, class: 'room ' + (R.c || '') }).forEach(([k, v]) => rect.setAttribute(k, v));
     g.appendChild(rect);
-    const t = document.createElementNS(NS, 'text'); t.setAttribute('x', R.x + R.w / 2); t.setAttribute('y', R.y + R.h / 2 - (R.d ? fs * .2 : -fs * .3)); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', fs); t.textContent = R.n; g.appendChild(t);
-    if (R.d) { const d = document.createElementNS(NS, 'text'); d.setAttribute('class', 'd'); d.setAttribute('x', R.x + R.w / 2); d.setAttribute('y', R.y + R.h / 2 + fs * 1.05); d.setAttribute('text-anchor', 'middle'); d.setAttribute('font-size', fs * .72); d.textContent = R.d; g.appendChild(d); }
+    const t = document.createElementNS(NS, 'text'); t.setAttribute('x', R.x + R.w / 2); t.setAttribute('y', R.y + R.h / 2 - (R.d ? fs * .2 : -fs * .3)); t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', fs); t.textContent = R.n.toUpperCase(); g.appendChild(t);
+    if (R.d) { const d = document.createElementNS(NS, 'text'); d.setAttribute('class', 'd'); d.setAttribute('x', R.x + R.w / 2); d.setAttribute('y', R.y + R.h / 2 + fs * 1.05); d.setAttribute('text-anchor', 'middle'); d.setAttribute('font-size', fs * .75); d.textContent = R.d; g.appendChild(d); }
     svg.appendChild(g);
     if (R.d) {
       const row = document.createElement('div'), a = document.createElement('span'), b = document.createElement('span');
@@ -785,7 +989,6 @@ function drawPlan(u) {
       const len = 2 * (R.w + R.h); rect.style.strokeDasharray = len; rect.style.strokeDashoffset = len;
       gsap.to(rect, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut', delay: i * .08, onComplete: () => { rect.style.strokeDasharray = ''; } });
     }
-    if (hasGsap && !reduce) gsap.from([...g.querySelectorAll('text')], { opacity: 0, y: 120, duration: .6, delay: .5 + i * .08, ease: 'expo.out' });
   });
   const A = U.areas, set = (id, val, m) => { document.getElementById(id).firstChild.textContent = val; document.getElementById(id + '-m').textContent = m + ' sq.m'; };
   set('a-sale', A.sale[0], A.sale[1]); set('a-built', A.built[0], A.built[1]); set('a-carpet', A.carpet[0], A.carpet[1]);
@@ -795,7 +998,7 @@ segBtns.forEach(b => b.addEventListener('click', () => { segBtns.forEach(x => x.
 drawPlan(1);
 
 /* Enquiry form: opens WhatsApp with the details filled in */
-const WHATSAPP_NUMBER = '919990751185';
+const WHATSAPP_NUMBER = '919999434837';
 const form = document.getElementById('enq'), statusEl = document.getElementById('f-status');
 document.getElementById('f-date').min = new Date().toISOString().slice(0, 10);
 function fieldErr(id, msg) { const inp = document.getElementById('f-' + id), e = document.getElementById('e-' + id); e.textContent = msg || ''; inp.setAttribute('aria-invalid', msg ? 'true' : 'false'); return !msg; }
